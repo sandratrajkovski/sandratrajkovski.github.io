@@ -194,10 +194,15 @@
   .data-table{ width:100%; border-collapse: collapse; margin: 20px 0 30px; font-size: 0.92rem; }
 
   .poster-thumb{
-    display:block; max-width: 280px; width:100%; margin: 24px 0; border-radius: 6px; border: 1px solid var(--line);
+    display:block; max-width: 280px; width:100%; margin: 24px 0 6px; border-radius: 6px; border: 1px solid var(--line);
     cursor: zoom-in; transition: transform .25s ease, box-shadow .25s ease;
   }
   .poster-thumb:hover{ transform: translateY(-2px); box-shadow: 0 12px 26px rgba(38,48,42,0.15); }
+  .poster-thumb-lg{ max-width: 420px; }
+  .img-caption{
+    font-size: 0.78rem; color: var(--ink-soft); margin: 0 0 24px; display:flex; align-items:center; gap: 5px;
+  }
+  .img-caption svg{ width: 13px; height: 13px; opacity: 0.7; }
   .lightbox-overlay{
     display:none; position: fixed; inset: 0; background: rgba(38,48,42,0.85); z-index: 200;
     align-items: center; justify-content: center; padding: 40px; cursor: zoom-out;
@@ -427,6 +432,7 @@
     <p>Long Beach apartment complexes need an accurate, low-cost way to detect lead contamination in water before it reaches residents. Commercial spectrophotometers are effective but expensive, so our team built a low-cost, 3D-printed spectrophotometer using an Arduino, a phototransistor, and swappable LED light sources to test whether an accessible design could still deliver reliable readings.</p>
 
     <img src="images/spectro-final.jpg" alt="Final spectrophotometer with green LED glowing inside the 3D-printed enclosure, wired to an Arduino Uno" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Hypothesis</h2>
     <ul>
@@ -457,7 +463,8 @@
     <h2>Overview</h2>
     <p>Larval Pacific sand dollars (<em>Dendraster excentricus</em>) rely on chemosensing to locate food and avoid predators during their earliest life stages, but their vertical swimming and feeding behavior in response to food gradients is hard to study in the field. This thesis used a custom microfluidic imaging platform, Aquavert, to observe how low-fed sand dollar larvae respond to algae concentration gradients across their first 14 days post-fertilization.</p>
 
-    <img src="images/thesis-aquavert-setup.jpg" alt="Aquavert imaging system diagram and photos, showing the imaging stage, camera setup, and the microfluidic chamber holder in portrait and landscape mode" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/thesis-aquavert-setup.jpg" alt="Aquavert imaging system diagram and photos, showing the imaging stage, camera setup, and the microfluidic chamber holder in portrait and landscape mode" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Method</h2>
     <ul>
@@ -467,12 +474,14 @@
       <li>Ran paired trials varying which inlet carried algae (top vs. bottom) and algae concentration (low vs. high) across days 1&ndash;14 post-fertilization</li>
     </ul>
 
-    <img src="images/thesis-flow-diagram.jpg" alt="Diagram of the two paired trial setups, showing seawater and unicellular red algae swapped between the top and bottom microfluidic inlets" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/thesis-flow-diagram.jpg" alt="Diagram of the two paired trial setups, showing seawater and unicellular red algae swapped between the top and bottom microfluidic inlets" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Results</h2>
     <p>Larvae consistently oriented toward and remained near the algae inlet across trials, regardless of whether it was positioned on the top or bottom channel. Flow rate mattered: rates at or below 1.5 mL/hr let larvae stay within the chip and feed comfortably, while higher flow rates gave a clearer visual of the algae boundary but flushed larvae out of the imaging area.</p>
 
     <img src="images/thesis-larva-microscopy.jpg" alt="Microscopy image captured with Aquavert showing sand dollar larvae near the microfluidic channel boundary" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Why it matters</h2>
     <p>This was hands-on validation that a low-cost, custom-fabricated microfluidic and imaging system can capture real chemosensory behavior in marine larvae. The fabrication skills involved (laser cutting, PDMS casting, plasma bonding, 3D-printed fixtures) carry directly into device prototyping in medtech.</p>
@@ -491,7 +500,8 @@
     <h2>Clinical Motivation</h2>
     <p>77% of stroke survivors experience upper limb impairment, and half face long-term motor impairment. Existing rehab tools like physical therapy, robotics, and functional electrical stimulation (FES) require constant supervision, which limits accessibility and consistency. This project explored an intention-driven alternative: a brain-computer interface that detects a patient's intentional brain activity and could eventually trigger external systems like robotics or FES, restoring basic movement for the hands and wrist.</p>
 
-    <img src="images/bci-poster.jpg" alt="Research poster: Integration and Optimization of Virtual Reality in EEG-Based Brain Computer Interfaces" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/bci-poster.jpg" alt="Research poster: Integration and Optimization of Virtual Reality in EEG-Based Brain Computer Interfaces" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Method</h2>
     <ul>
@@ -525,6 +535,7 @@
     <p>Roughly 11 million people in the U.S. are deaf or hard of hearing, but only around 500,000 people are fluent in ASL. That gap leaves many deaf individuals dependent on a human interpreter, especially in emergencies. This project built a wearable glove that interprets ASL fingerspelling into English text in real time through a companion smartphone app, at a fraction of the cost of commercial sign-language translation gloves (about $3,300 retail).</p>
 
     <img src="images/glove-photo.jpg" alt="Labeled photo of the ASL translation glove showing the smartphone app, flex sensors, accelerometer, and HC-05 Bluetooth module" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Bill of Materials</h2>
     <table class="data-table">
@@ -545,7 +556,8 @@
       <li>A custom MIT App Inventor app received the Bluetooth signal and displayed the translated text live</li>
     </ul>
 
-    <img src="images/glove-circuit.jpg" alt="Circuit diagram showing flex sensors, accelerometer, Arduino Uno, and HC-05 Bluetooth wiring" class="poster-thumb" style="background:white; padding:12px;" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/glove-circuit.jpg" alt="Circuit diagram showing flex sensors, accelerometer, Arduino Uno, and HC-05 Bluetooth wiring" class="poster-thumb poster-thumb-lg" style="background:white; padding:12px;" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Demo</h2>
     <div style="position:relative; width:100%; padding-top:56.25%; margin:24px 0; border-radius:2px; overflow:hidden; background:var(--bg-alt);">
@@ -578,7 +590,8 @@
     <p>Subjective coma prognoses can lead to premature withdrawal of life support. An estimated 48,000 of the 255,000 annual deaths from withdrawn life support may be preventable.</p>
     <p>This project set out to predict coma recovery in a multi-modal fashion, combining brain signal strength, source localization, and interpretable machine learning, to give clinicians an objective, evidence-based tool alongside their own judgment.</p>
 
-    <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Pipeline</h2>
     <ul>
@@ -590,12 +603,14 @@
       <li><strong>Clinical translation:</strong> Findings mocked into a bedside tablet dashboard combining outcome predictions, brain signal strength, source localization, and raw EEG</li>
     </ul>
 
-    <img src="images/capstone-pipeline-diagram.jpg" alt="Diagram showing the EEG pipeline: 19-channel EEG in 5 minute windows, mapped from sensor space to source space, producing 86 atlas-defined regions of interest" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/capstone-pipeline-diagram.jpg" alt="Diagram showing the EEG pipeline: 19-channel EEG in 5 minute windows, mapped from sensor space to source space, producing 86 atlas-defined regions of interest" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Data &amp; Results</h2>
     <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery. The ProtoPNet and 3D trajectory-embedding stages provide interpretable, clinician-facing explanations for each prediction, rather than a black-box score.</p>
 
-    <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+    <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Why It Matters</h2>
     <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment, which directly addresses the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in the works for peer-reviewed publication.</p>
