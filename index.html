@@ -229,6 +229,7 @@
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#cv">CV</a>
+      <a href="files/Sandra_Trajkovski_Resume.pdf" download>Resume</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -251,6 +252,7 @@
         </div>
         <div class="cta-row reveal">
           <a href="#projects" class="btn solid">View Projects</a>
+          <a href="files/Sandra_Trajkovski_Resume.pdf" class="btn ghost" download>Download Resume</a>
           <a href="#contact" class="btn ghost">Get in Touch</a>
         </div>
       </div>
@@ -265,7 +267,7 @@
       <div class="about-grid">
         <div class="reveal">
           <p>I'm a recent MEng Bioengineering graduate from UC Berkeley (Magna Cum Laude), with a BS in Biomedical Engineering from CSULB (Summa Cum Laude, Engineering Honors Program). My MEng capstone, in collaboration with UCSF Health, built an EEG-based neurological outcome prediction pipeline for post-cardiac arrest patients.</p>
-          <p>I'm bilingual in English and French, and I'm currently based in Long Beach, CA, open to roles across San Diego and the Bay Area.</p>
+          <p>I'm bilingual in English and French, and I'm currently based in Los Angeles, CA, open to roles across Los Angeles, San Diego, and the Bay Area.</p>
           <p>Before graduate school, I worked as a nursing assistant in Surgery/Oncology and Medical Imaging at Mount Sinai Hospital Toronto, which gives me a clinically grounded perspective on how devices actually get used at the bedside and in the OR.</p>
         </div>
         <div class="reveal">
@@ -273,8 +275,8 @@
           <li><span>Education</span><span>MEng Bioengineering, UC Berkeley (Magna Cum Laude)</span></li>
           <li><span>Undergraduate</span><span>BS BME, CSULB (Summa Cum Laude, Engineering Honors Program)</span></li>
           <li><span>Languages</span><span>English, French</span></li>
-          <li><span>Based in</span><span>Long Beach, CA</span></li>
-          <li><span>Open to</span><span>San Diego, Bay Area</span></li>
+          <li><span>Based in</span><span>Los Angeles, CA</span></li>
+          <li><span>Open to</span><span>Los Angeles, San Diego, Bay Area</span></li>
         </ul>
         </div>
       </div>
@@ -396,9 +398,10 @@
 
       <div class="cv-block reveal">
         <h3>Technical Skills</h3>
-        <div class="cv-row"><span class="role">Signal Processing &amp; Analysis</span><span class="meta">MATLAB, Python, source localization, feature extraction</span></div>
-        <div class="cv-row"><span class="role">Machine Learning</span><span class="meta">ProtoPNet, BiLSTM, Hidden Markov Models</span></div>
-        <div class="cv-row"><span class="role">Hardware &amp; Fabrication</span><span class="meta">Arduino, SolidWorks, AutoCAD, 3D printing, circuit design</span></div>
+        <div class="cv-row"><span class="role">CAD &amp; Design</span><span class="meta">SolidWorks, AutoCAD, 3D modeling, assemblies, engineering drawings</span></div>
+        <div class="cv-row"><span class="role">Fabrication &amp; Prototyping</span><span class="meta">Microfluidic device fabrication, laser cutting, fixture design, bench assembly, test setup design, instrument build-and-validate</span></div>
+        <div class="cv-row"><span class="role">Analysis &amp; Documentation</span><span class="meta">Statistical analysis, root cause analysis, technical report writing, MATLAB, Python, Excel, Word, PowerPoint</span></div>
+        <div class="cv-row"><span class="role">Professional</span><span class="meta">Cross-functional collaboration, iterative design, attention to detail, independent and team-based work</span></div>
         <div class="cv-row"><span class="role">Languages</span><span class="meta">English, French</span></div>
       </div>
     </div>
@@ -408,10 +411,11 @@
     <div class="wrap">
       <div class="section-label reveal">Contact</div>
       <h2 class="reveal">Let's talk.</h2>
-      <p class="reveal" style="color:var(--ink-soft); max-width:520px;">Open to roles in medtech, neurotech, and biotech. Based in Long Beach, open to San Diego and the Bay Area.</p>
+      <p class="reveal" style="color:var(--ink-soft); max-width:520px;">Open to roles in medtech, neurotech, and biotech. Based in Los Angeles, open to Los Angeles, San Diego, and the Bay Area.</p>
       <div class="contact-links reveal">
         <a href="mailto:sandratrajkovski@berkeley.edu">Email</a>
         <a href="https://www.linkedin.com/in/sandra-trajkovski" target="_blank">LinkedIn</a>
+        <a href="files/Sandra_Trajkovski_Resume.pdf" download>Download Resume</a>
       </div>
     </div>
   </section>
@@ -613,6 +617,7 @@
     <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery. The ProtoPNet and 3D trajectory-embedding stages provide interpretable, clinician-facing explanations for each prediction, rather than a black-box score.</p>
 
     <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <p style="font-size: 0.85rem; color: var(--ink-soft); margin: -2px 0 6px; max-width: 500px;">Six clinical EEG pattern classes (GRDA, GPD, LRDA, LPD, seizure, and burst suppression), each mapped to its own learned prototype and colored by alpha power.</p>
     <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
     <h2>Why It Matters</h2>
