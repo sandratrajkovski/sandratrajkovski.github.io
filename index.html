@@ -54,7 +54,10 @@
   .hero-intro{ font-size: clamp(1.5rem, 3.2vw, 2.2rem); line-height: 1.15; color: var(--green-deep); margin-bottom: 20px; font-family: 'DM Serif Display', serif; min-height: 1.2em; }
   .type-cursor{ display:inline-block; width:2px; height: 1.05em; background: var(--green-deep); margin-left: 2px; vertical-align: text-bottom; animation: blink 0.9s step-start infinite; }
   @keyframes blink{ 50%{ opacity: 0; } }
-  .hero-photo{ width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); margin-bottom: 28px; display:block; }
+  .hero-photo{ width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); display:block; flex: 0 0 auto; }
+  .hero-grid{ display:flex; align-items:center; justify-content:space-between; gap: 48px; }
+  .hero-text{ flex: 1; min-width: 0; }
+  @media (max-width: 780px){ .hero-grid{ flex-direction: column-reverse; align-items: flex-start; gap: 28px; } .hero-photo{ width: 140px; height: 140px; } }
   .hero h1{ font-size: clamp(1.3rem, 2.6vw, 1.7rem); line-height: 1.25; max-width: 700px; color: var(--green-deep); font-weight: 400; }
   .hero p.lead{ margin-top: 26px; max-width: 560px; font-size: 1.1rem; color: var(--ink-soft); }
   .hero .cta-row{ margin-top: 38px; display:flex; gap: 18px; flex-wrap: wrap; }
@@ -141,8 +144,8 @@
   .exp-clinical{ border-left-color: #8A4B32; }
   .edu-card{
     padding: 18px 22px; margin-bottom: 12px; border-radius: 10px;
-    background: linear-gradient(135deg, rgba(196,157,58,0.10), rgba(196,157,58,0.03));
-    border-left: 4px solid #C49D3A; transition: transform .25s ease, box-shadow .25s ease;
+    background: linear-gradient(135deg, rgba(31,107,102,0.10), rgba(31,107,102,0.03));
+    border-left: 4px solid #1F6B66; transition: transform .25s ease, box-shadow .25s ease;
   }
   .edu-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(38,48,42,0.08); }
   .edu-card .edu-top{ display:flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 3px; }
@@ -152,7 +155,7 @@
   .honor-badges{ display:flex; flex-wrap: wrap; gap: 8px; }
   .honor-badge{
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
-    color: #8A6D1E; background: rgba(196,157,58,0.16); border: 1px solid rgba(196,157,58,0.35);
+    color: #1F6B66; background: rgba(31,107,102,0.12); border: 1px solid rgba(31,107,102,0.32);
     padding: 4px 10px; border-radius: 999px;
   }
 
@@ -191,7 +194,7 @@
   .data-table{ width:100%; border-collapse: collapse; margin: 20px 0 30px; font-size: 0.92rem; }
 
   .poster-thumb{
-    display:block; max-width: 380px; width:100%; margin: 24px 0; border-radius: 6px; border: 1px solid var(--line);
+    display:block; max-width: 280px; width:100%; margin: 24px 0; border-radius: 6px; border: 1px solid var(--line);
     cursor: zoom-in; transition: transform .25s ease, box-shadow .25s ease;
   }
   .poster-thumb:hover{ transform: translateY(-2px); box-shadow: 0 12px 26px rgba(38,48,42,0.15); }
@@ -230,19 +233,23 @@
 <div id="home-page" class="active">
 
   <header class="hero wrap">
-    <div class="hero-intro reveal"><span id="typed-greeting"></span><span class="type-cursor"></span></div>
-    <img src="images/profile.jpg" alt="Sandra Trajkovski" class="hero-photo reveal">
-    <h1 class="reveal">I build instruments that turn raw physiological signals into decisions clinicians can trust.</h1>
-    <p class="lead reveal">From lead-detection spectrophotometers to EEG pipelines predicting recovery after cardiac arrest, my work sits at the intersection of hands-on device engineering and signal processing.</p>
-    <div class="skill-pills reveal">
-      <span class="skill-pill">Device Prototyping</span>
-      <span class="skill-pill">Microfluidic Fabrication</span>
-      <span class="skill-pill">Fixture &amp; Test Setup Design</span>
-      <span class="skill-pill">Build-and-Validate Instrumentation</span>
-    </div>
-    <div class="cta-row reveal">
-      <a href="#projects" class="btn solid">View Projects</a>
-      <a href="#contact" class="btn ghost">Get in Touch</a>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-intro reveal"><span id="typed-greeting"></span><span class="type-cursor"></span></div>
+        <h1 class="reveal">I build instruments that turn raw physiological signals into decisions clinicians can trust.</h1>
+        <p class="lead reveal">From lead-detection spectrophotometers to EEG pipelines predicting recovery after cardiac arrest, my work sits at the intersection of hands-on device engineering and signal processing.</p>
+        <div class="skill-pills reveal">
+          <span class="skill-pill">Device Prototyping</span>
+          <span class="skill-pill">Microfluidic Fabrication</span>
+          <span class="skill-pill">Fixture &amp; Test Setup Design</span>
+          <span class="skill-pill">Build-and-Validate Instrumentation</span>
+        </div>
+        <div class="cta-row reveal">
+          <a href="#projects" class="btn solid">View Projects</a>
+          <a href="#contact" class="btn ghost">Get in Touch</a>
+        </div>
+      </div>
+      <img src="images/profile.jpg" alt="Sandra Trajkovski" class="hero-photo reveal">
     </div>
   </header>
 
@@ -252,7 +259,7 @@
       <h2 class="reveal">Clinical grounding, engineering rigor.</h2>
       <div class="about-grid">
         <div class="reveal">
-          <p>I'm a recent MEng Bioengineering graduate from UC Berkeley (Magna Cum Laude), with a BS in Biomedical Engineering from CSULB (2021&ndash;2025, Summa Cum Laude, Engineering Honors Program). My MEng capstone, in collaboration with UCSF Health, built an EEG-based neurological outcome prediction pipeline for post-cardiac arrest patients.</p>
+          <p>I'm a recent MEng Bioengineering graduate from UC Berkeley (Magna Cum Laude), with a BS in Biomedical Engineering from CSULB (Summa Cum Laude, Engineering Honors Program). My MEng capstone, in collaboration with UCSF Health, built an EEG-based neurological outcome prediction pipeline for post-cardiac arrest patients.</p>
           <p>I'm bilingual in English and French, and I'm currently based in Long Beach, CA, open to roles across San Diego and the Bay Area.</p>
           <p>Before graduate school, I worked as a nursing assistant in Surgery/Oncology and Medical Imaging at Mount Sinai Hospital Toronto, which gives me a clinically grounded perspective on how devices actually get used at the bedside and in the OR.</p>
         </div>
@@ -273,6 +280,7 @@
     <div class="wrap">
       <div class="section-label reveal">Projects</div>
       <h2 class="reveal">Selected work, in order.</h2>
+      <p class="reveal" style="color: var(--ink-soft); font-size: 0.95rem; margin-top: -18px; margin-bottom: 28px;">Click into any project below for details, data, and photos of the actual builds.</p>
       <div class="timeline">
 
         <div class="proj proj-instr reveal">
@@ -299,8 +307,8 @@
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Spring 2025</div></div>
           <div class="proj-card">
             <span class="tag tag-neuro">Neurotech &middot; CSULB</span>
-            <h3>VR-Integrated EEG Brain-Computer Interface</h3>
-            <p>Tested whether presenting SSVEP stimuli in VR, instead of on a laptop, improves signal quality using an OpenBCI 19-electrode cap. VR produced significantly stronger SSVEP power at all three tested frequencies (p &lt; 0.05).</p>
+            <h3>EEG-VR Integration for Motor Rehabilitation</h3>
+            <p>Tested whether presenting SSVEP stimuli in VR, instead of on a laptop, improves signal quality for a future intention-driven rehab tool. IRB-approved protocol audited against ISO 13485, ISO 14971, and IEC 62304, with VR producing significantly stronger SSVEP power at all three tested frequencies.</p>
             <a href="#bci" class="details-link">View details <span class="arrow">&rarr;</span></a>
           </div>
         </div>
@@ -418,7 +426,7 @@
     <h2>Overview</h2>
     <p>Long Beach apartment complexes need an accurate, low-cost way to detect lead contamination in water before it reaches residents. Commercial spectrophotometers are effective but expensive, so our team built a low-cost, 3D-printed spectrophotometer using an Arduino, a phototransistor, and swappable LED light sources to test whether an accessible design could still deliver reliable readings.</p>
 
-    <img src="images/spectro-final.jpg" alt="Final spectrophotometer with green LED glowing inside the 3D-printed enclosure, wired to an Arduino Uno" style="width:100%; border-radius:2px; margin:24px 0;">
+    <img src="images/spectro-final.jpg" alt="Final spectrophotometer with green LED glowing inside the 3D-printed enclosure, wired to an Arduino Uno" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Hypothesis</h2>
     <ul>
@@ -449,6 +457,8 @@
     <h2>Overview</h2>
     <p>Larval Pacific sand dollars (<em>Dendraster excentricus</em>) rely on chemosensing to locate food and avoid predators during their earliest life stages, but their vertical swimming and feeding behavior in response to food gradients is hard to study in the field. This thesis used a custom microfluidic imaging platform, Aquavert, to observe how low-fed sand dollar larvae respond to algae concentration gradients across their first 14 days post-fertilization.</p>
 
+    <img src="images/thesis-aquavert-setup.jpg" alt="Aquavert imaging system diagram and photos, showing the imaging stage, camera setup, and the microfluidic chamber holder in portrait and landscape mode" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+
     <h2>Method</h2>
     <ul>
       <li>Spawned and cultured <em>Dendraster excentricus</em> larvae from adults collected in San Pedro, CA, feeding them unicellular red algae on a controlled low-feeding schedule</li>
@@ -457,8 +467,12 @@
       <li>Ran paired trials varying which inlet carried algae (top vs. bottom) and algae concentration (low vs. high) across days 1&ndash;14 post-fertilization</li>
     </ul>
 
+    <img src="images/thesis-flow-diagram.jpg" alt="Diagram of the two paired trial setups, showing seawater and unicellular red algae swapped between the top and bottom microfluidic inlets" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+
     <h2>Results</h2>
     <p>Larvae consistently oriented toward and remained near the algae inlet across trials, regardless of whether it was positioned on the top or bottom channel. Flow rate mattered: rates at or below 1.5 mL/hr let larvae stay within the chip and feed comfortably, while higher flow rates gave a clearer visual of the algae boundary but flushed larvae out of the imaging area.</p>
+
+    <img src="images/thesis-larva-microscopy.jpg" alt="Microscopy image captured with Aquavert showing sand dollar larvae near the microfluidic channel boundary" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Why it matters</h2>
     <p>This was hands-on validation that a low-cost, custom-fabricated microfluidic and imaging system can capture real chemosensory behavior in marine larvae. The fabrication skills involved (laser cutting, PDMS casting, plasma bonding, 3D-printed fixtures) carry directly into device prototyping in medtech.</p>
@@ -470,27 +484,31 @@
   <div class="detail-hero wrap">
     <a href="#projects" class="back-link">&larr; Back to Projects</a>
     <span class="tag tag-neuro">Neurotech &middot; CSULB &middot; 2024&ndash;2025</span>
-    <h1>Integration and Optimization of Virtual Reality in EEG-Based Brain-Computer Interfaces</h1>
+    <h1>EEG-VR Integration for Brain-Activated Motor Rehabilitation</h1>
     <div class="meta-row">Team project &middot; CSULB</div>
   </div>
   <div class="detail-body wrap">
-    <h2>Overview</h2>
-    <p>Brain-computer interfaces that rely on steady-state visually evoked potentials (SSVEP, a neural response to a flickering visual stimulus at a specific frequency) typically present that stimulus on a laptop screen. This project tested whether presenting the same stimulus inside a fully immersive VR environment would produce a stronger, more usable signal, since VR is known to improve patient engagement in other clinical contexts.</p>
+    <h2>Clinical Motivation</h2>
+    <p>77% of stroke survivors experience upper limb impairment, and half face long-term motor impairment. Existing rehab tools like physical therapy, robotics, and functional electrical stimulation (FES) require constant supervision, which limits accessibility and consistency. This project explored an intention-driven alternative: a brain-computer interface that detects a patient's intentional brain activity and could eventually trigger external systems like robotics or FES, restoring basic movement for the hands and wrist.</p>
 
     <img src="images/bci-poster.jpg" alt="Research poster: Integration and Optimization of Virtual Reality in EEG-Based Brain Computer Interfaces" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Method</h2>
     <ul>
-      <li>Recorded EEG from 2 subjects using a standard 19-electrode OpenBCI cap, focusing on parietal, temporal, and occipital electrodes (strongest visual response region)</li>
-      <li>Presented flickering stimuli at 13Hz, 15Hz, and 17Hz, each for 5-minute segments (10 trials per frequency, plus a relaxed baseline), once in VR and once on a laptop</li>
-      <li>Preprocessed signals with common average referencing, bandpass filtering, and whitening, then computed normalized target-to-non-target frequency power ratios per trial</li>
+      <li>Recorded EEG from subjects using a standard 19-electrode OpenBCI cap (Cyton-Daisy module), focusing on parietal, temporal, and occipital electrodes, the strongest region for visual response</li>
+      <li>Presented flickering stimuli at 13Hz, 15Hz, and 17Hz (plus a 0Hz control) to evoke steady-state visually evoked potentials (SSVEP), a resonance response with a high signal-to-noise ratio, once in VR and once on a laptop, 10 trials per frequency</li>
+      <li>Standardized study conditions for reproducibility: fixed VR screen size, resolution, and frame rate, with subjects instructed to sit upright, stay still, and minimize blinking during stimulus</li>
+      <li>Preprocessed signals with common average referencing, bandpass filtering, and log-log whitening, then compared FFT power between VR and laptop conditions</li>
     </ul>
 
+    <h2>Quality &amp; Compliance</h2>
+    <p>Since this involved live human-subjects data collection, the study received IRB approval before testing began, and the protocol was audited against ISO 13485 (medical device quality management), ISO 14971 (risk management for medical devices), and IEC 62304 (safe data collection and analysis for medical device software). Subject fatigue was also actively managed with scheduled breaks and inter-stimulus intervals.</p>
+
     <h2>Results</h2>
-    <p>SSVEP power was significantly higher in the VR condition than on the laptop at all three stimulus frequencies (p &lt; 0.05 for 13Hz, 15Hz, and 17Hz). Topographic maps showed the O1 electrode (lower-left occipital site) consistently produced the strongest response across both conditions and all three frequencies.</p>
+    <p>SSVEP power was significantly higher in the VR condition than on the laptop at all three stimulus frequencies: p = 0.0086 at 13Hz, p = 0.0276 at 15Hz, and p = 0.0020 at 17Hz. The O1 electrode (lower-left occipital site) consistently produced the strongest response across both conditions and all three frequencies.</p>
 
     <h2>Conclusion</h2>
-    <p>VR turned out to be a viable, and in this case stronger, stimulus platform for SSVEP-based brain-computer interfaces, which supports future use in therapeutic and rehabilitation applications. Planned follow-up work includes a machine learning pipeline for automated signal classification and live data processing.</p>
+    <p>VR turned out to be a viable, and in this case stronger, stimulus platform for SSVEP-based brain-computer interfaces. This supports building future rehab systems around cognitive intent and active patient participation, with a documented, IRB-approved, standards-audited protocol other researchers could reproduce.</p>
   </div>
 </div>
 
@@ -506,7 +524,7 @@
     <h2>Overview</h2>
     <p>Roughly 11 million people in the U.S. are deaf or hard of hearing, but only around 500,000 people are fluent in ASL. That gap leaves many deaf individuals dependent on a human interpreter, especially in emergencies. This project built a wearable glove that interprets ASL fingerspelling into English text in real time through a companion smartphone app, at a fraction of the cost of commercial sign-language translation gloves (about $3,300 retail).</p>
 
-    <img src="images/glove-photo.jpg" alt="Labeled photo of the ASL translation glove showing the smartphone app, flex sensors, accelerometer, and HC-05 Bluetooth module" style="width:100%; border-radius:2px; margin:24px 0;">
+    <img src="images/glove-photo.jpg" alt="Labeled photo of the ASL translation glove showing the smartphone app, flex sensors, accelerometer, and HC-05 Bluetooth module" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Bill of Materials</h2>
     <table class="data-table">
@@ -527,7 +545,7 @@
       <li>A custom MIT App Inventor app received the Bluetooth signal and displayed the translated text live</li>
     </ul>
 
-    <img src="images/glove-circuit.jpg" alt="Circuit diagram showing flex sensors, accelerometer, Arduino Uno, and HC-05 Bluetooth wiring" style="width:100%; border-radius:2px; margin:24px 0; background:white; padding:16px;">
+    <img src="images/glove-circuit.jpg" alt="Circuit diagram showing flex sensors, accelerometer, Arduino Uno, and HC-05 Bluetooth wiring" class="poster-thumb" style="background:white; padding:12px;" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Demo</h2>
     <div style="position:relative; width:100%; padding-top:56.25%; margin:24px 0; border-radius:2px; overflow:hidden; background:var(--bg-alt);">
@@ -557,7 +575,8 @@
   </div>
   <div class="detail-body wrap">
     <h2>The Problem</h2>
-    <p>Subjective coma prognoses can lead to premature withdrawal of life support. Of an estimated 255,000 annual coma deaths from withdrawn life support, over 48,000 may be preventable: cases where a patient showed signs of recovery after doctors determined, without objective evidence, that recovery was unlikely.</p>
+    <p>Subjective coma prognoses can lead to premature withdrawal of life support. An estimated 48,000 of the 255,000 annual deaths from withdrawn life support may be preventable.</p>
+    <p>This project set out to predict coma recovery in a multi-modal fashion, combining brain signal strength, source localization, and interpretable machine learning, to give clinicians an objective, evidence-based tool alongside their own judgment.</p>
 
     <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
@@ -571,8 +590,12 @@
       <li><strong>Clinical translation:</strong> Findings mocked into a bedside tablet dashboard combining outcome predictions, brain signal strength, source localization, and raw EEG</li>
     </ul>
 
+    <img src="images/capstone-pipeline-diagram.jpg" alt="Diagram showing the EEG pipeline: 19-channel EEG in 5 minute windows, mapped from sensor space to source space, producing 86 atlas-defined regions of interest" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
+
     <h2>Data &amp; Results</h2>
     <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery. The ProtoPNet and 3D trajectory-embedding stages provide interpretable, clinician-facing explanations for each prediction, rather than a black-box score.</p>
+
+    <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb" onclick="openLightbox(this.src, this.alt)">
 
     <h2>Why It Matters</h2>
     <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment, which directly addresses the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in the works for peer-reviewed publication.</p>
