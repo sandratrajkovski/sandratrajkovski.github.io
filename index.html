@@ -132,9 +132,10 @@
   /* CV */
   .cv-block{ margin-bottom: 34px; }
   .cv-block h3{ font-size: 1.1rem; color: var(--green-deep); margin-bottom: 14px; font-family:'DM Sans'; font-weight:700; letter-spacing: 0.02em;}
-  .cv-row{ display:flex; justify-content:space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; }
+  .cv-row{ display:grid; grid-template-columns: 160px 1fr; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; align-items: start; }
   .cv-row .role{ font-weight: 500; }
-  .cv-row .meta{ color: var(--ink-soft); text-align:right; white-space:nowrap; }
+  .cv-row .meta{ color: var(--ink-soft); text-align: left; }
+  @media (max-width: 640px){ .cv-row{ grid-template-columns: 1fr; gap: 4px; } .cv-row .meta{ text-align: left; } }
   .exp-card{ padding: 16px 20px; margin-bottom: 12px; border-radius: 10px; border-left: 4px solid var(--line); background: var(--bg-alt); transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
   .exp-card:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(38,48,42,0.08); background: var(--card); }
   .exp-card .exp-role{ font-weight: 600; color: var(--ink); font-size: 0.98rem; }
