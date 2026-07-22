@@ -116,6 +116,14 @@
   .proj .dot{ flex: 0 0 auto; width:9px; height:9px; border-radius:50%; background: var(--green); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
   .proj:hover .dot{ transform: scale(1.5); }
   @media (max-width: 640px){ .proj .dot{ display:none; } .proj .yr-wrap{ padding-top: 0; } }
+  .proj-card{ display:flex; justify-content:space-between; align-items:flex-start; gap: 24px; }
+  .proj-card-text{ flex: 1; min-width: 0; }
+  .proj-thumb{
+    flex: 0 0 auto; width: 108px; height: 108px; object-fit: cover; border-radius: 8px;
+    border: 1px solid var(--line); transition: transform .3s ease;
+  }
+  .proj:hover .proj-thumb{ transform: scale(1.04); }
+  @media (max-width: 640px){ .proj-card{ flex-direction: column-reverse; } .proj-thumb{ width: 100%; height: 140px; } }
   .proj-card h3{ font-size: 1.35rem; color: var(--ink); margin-bottom: 8px; }
   .proj-card .tag{ display:inline-block; font-size: 0.75rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--green-deep); background: rgba(92,113,97,0.12); padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
   .tag-capstone{ color:#2E5266 !important; background: rgba(46,82,102,0.12) !important; }
@@ -294,50 +302,65 @@
         <div class="proj proj-instr reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Fall 2024</div></div>
           <div class="proj-card">
-            <span class="tag tag-instr">Instrumentation</span>
-            <h3>Low-Cost Spectrophotometer for Lead Contamination</h3>
-            <p>Designed and validated a low-cost spectrophotometer to detect lead contamination, comparing yellow and green LED performance with and without a 3D-printed enclosure.</p>
-            <a href="#spectrophotometer" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            <div class="proj-card-text">
+              <span class="tag tag-instr">Instrumentation</span>
+              <h3>Low-Cost Spectrophotometer for Lead Contamination</h3>
+              <p>Designed and validated a low-cost spectrophotometer to detect lead contamination, comparing yellow and green LED performance with and without a 3D-printed enclosure.</p>
+              <a href="#spectrophotometer" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            </div>
+            <img src="images/spectro-final.jpg" alt="Spectrophotometer thumbnail" class="proj-thumb">
           </div>
         </div>
 
         <div class="proj proj-thesis reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Fall 2024</div></div>
           <div class="proj-card">
-            <span class="tag tag-thesis">Honors Thesis &middot; CSULB</span>
-            <h3>Swimming and Feeding Characteristics of Sand Dollar Larvae via Aquavert</h3>
-            <p>Designed and fabricated a microfluidic imaging platform (laser-cut PMMA molds, PDMS casting, plasma bonding, 3D-printed camera mounts) to study how sand dollar larvae respond to food gradients. Hands-on microfabrication and instrumentation work from the ground up.</p>
-            <a href="#microfluidics" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            <div class="proj-card-text">
+              <span class="tag tag-thesis">Honors Thesis &middot; CSULB</span>
+              <h3>Swimming and Feeding Characteristics of Sand Dollar Larvae via Aquavert</h3>
+              <p>Designed and fabricated a microfluidic imaging platform (laser-cut PMMA molds, PDMS casting, plasma bonding, 3D-printed camera mounts) to study how sand dollar larvae respond to food gradients. Hands-on microfabrication and instrumentation work from the ground up.</p>
+              <a href="#microfluidics" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            </div>
+            <img src="images/thesis-aquavert-setup.jpg" alt="Aquavert imaging setup thumbnail" class="proj-thumb">
           </div>
         </div>
 
         <div class="proj proj-neuro reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Spring 2025</div></div>
           <div class="proj-card">
-            <span class="tag tag-neuro">Neurotech &middot; CSULB</span>
-            <h3>EEG-VR Integration for Motor Rehabilitation</h3>
-            <p>Tested whether presenting SSVEP stimuli in VR, instead of on a laptop, improves signal quality for a future intention-driven rehab tool. IRB-approved protocol audited against ISO 13485, ISO 14971, and IEC 62304, with VR producing significantly stronger SSVEP power at all three tested frequencies.</p>
-            <a href="#bci" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            <div class="proj-card-text">
+              <span class="tag tag-neuro">Neurotech &middot; CSULB</span>
+              <h3>EEG-VR Integration for Motor Rehabilitation</h3>
+              <p>Tested whether presenting SSVEP stimuli in VR, instead of on a laptop, improves signal quality for a future intention-driven rehab tool. IRB-approved protocol audited against ISO 13485, ISO 14971, and IEC 62304, with VR producing significantly stronger SSVEP power at all three tested frequencies.</p>
+              <a href="#bci" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            </div>
+            <img src="images/bci-poster.jpg" alt="BCI research poster thumbnail" class="proj-thumb">
           </div>
         </div>
 
         <div class="proj proj-hardware reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Spring 2025</div></div>
           <div class="proj-card">
-            <span class="tag tag-hardware">Hardware &middot; CSULB</span>
-            <h3>Low-Cost ASL Translation Glove</h3>
-            <p>A $58.71 wearable (commercial versions run about $3,300) that translates ASL fingerspelling to text in real time, using Arduino, flex sensors, an accelerometer, and a custom MIT App Inventor mobile app.</p>
-            <a href="#glove" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            <div class="proj-card-text">
+              <span class="tag tag-hardware">Hardware &middot; CSULB</span>
+              <h3>Low-Cost ASL Translation Glove</h3>
+              <p>A $58.71 wearable (commercial versions run about $3,300) that translates ASL fingerspelling to text in real time, using Arduino, flex sensors, an accelerometer, and a custom MIT App Inventor mobile app.</p>
+              <a href="#glove" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            </div>
+            <img src="images/glove-photo.jpg" alt="ASL translation glove thumbnail" class="proj-thumb">
           </div>
         </div>
 
         <div class="proj proj-capstone reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Spring 2026</div></div>
           <div class="proj-card">
-            <span class="tag tag-capstone">Capstone &middot; UCSF Health</span>
-            <h3>Predicting Coma Recovery from Brain Signals</h3>
-            <p>Full pipeline from raw EEG through CHAMPAGNE source localization, 86 Desikan-Killiany atlas ROIs, feature extraction, and ProtoPNet classification, deployed to a bedside dashboard concept. Trained on about 1,000 patients across 7 hospitals, achieving 93% AUC-ROC. A manuscript is in the works for peer-reviewed publication.</p>
-            <a href="#eeg-capstone" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            <div class="proj-card-text">
+              <span class="tag tag-capstone">Capstone &middot; UCSF Health</span>
+              <h3>Predicting Coma Recovery from Brain Signals</h3>
+              <p>Full pipeline from raw EEG through CHAMPAGNE source localization, 86 Desikan-Killiany atlas ROIs, feature extraction, and ProtoPNet classification, deployed to a bedside dashboard concept. Trained on about 1,000 patients across 7 hospitals, achieving 93% AUC-ROC. A manuscript is in the works for peer-reviewed publication.</p>
+              <a href="#eeg-capstone" class="details-link">View details <span class="arrow">&rarr;</span></a>
+            </div>
+            <img src="images/eeg-capstone-poster.jpg" alt="EEG capstone research poster thumbnail" class="proj-thumb">
           </div>
         </div>
 
@@ -401,7 +424,7 @@
         <h3>Technical Skills</h3>
         <div class="cv-row"><span class="role">CAD &amp; Design</span><span class="meta">SolidWorks, AutoCAD, 3D modeling, assemblies, engineering drawings</span></div>
         <div class="cv-row"><span class="role">Fabrication &amp; Prototyping</span><span class="meta">Microfluidic device fabrication, laser cutting, fixture design, bench assembly, test setup design, instrument build-and-validate</span></div>
-        <div class="cv-row"><span class="role">Analysis &amp; Documentation</span><span class="meta">Statistical analysis, root cause analysis, technical report writing, MATLAB, Python, Excel, Word, PowerPoint</span></div>
+        <div class="cv-row"><span class="role">Analysis &amp; Documentation</span><span class="meta">Statistical analysis, root cause analysis, technical report writing, SOP development, MATLAB, Python, Excel, Word, PowerPoint</span></div>
         <div class="cv-row"><span class="role">Professional</span><span class="meta">Cross-functional collaboration, iterative design, attention to detail, independent and team-based work</span></div>
         <div class="cv-row"><span class="role">Languages</span><span class="meta">English, French</span></div>
       </div>
