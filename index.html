@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandra Trajkovski — Bioengineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F5F3ED;
+    --bg-alt: #EFEDE4;
+    --ink: #26302A;
+    --ink-soft: #5B6259;
+    --green-deep: #34433A;
+    --green: #5C7161;
+    --green-mute: #8B9A85;
+    --line: rgba(38,48,42,0.14);
+    --card: #FFFFFE;
+    --radius: 2px;
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,.serif{ font-family: 'DM Serif Display', serif; font-weight: 400; }
+  a{ color: inherit; text-decoration: none; }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 640px){ .wrap{ padding: 0 20px; } }
+
+  /* NAV */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(245,243,237,0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height: 68px; }
+  .brand{ font-family:'DM Serif Display', serif; font-size: 1.25rem; letter-spacing: 0.01em; }
+  .navlinks{ display:flex; gap: 28px; font-size: 0.92rem; color: var(--ink-soft); }
+  .navlinks a:hover{ color: var(--green-deep); }
+
+  /* reveal */
+  .reveal{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ transition:none; opacity:1; transform:none; } }
+
+  /* HERO */
+  .hero{ padding: 120px 0 90px; }
+  .eyebrow{ font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+  .hero h1{ font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; max-width: 820px; color: var(--green-deep); }
+  .hero p.lead{ margin-top: 26px; max-width: 560px; font-size: 1.1rem; color: var(--ink-soft); }
+  .hero .cta-row{ margin-top: 38px; display:flex; gap: 18px; flex-wrap: wrap; }
+  .btn{
+    display:inline-block; padding: 12px 22px; border: 1px solid var(--green-deep);
+    border-radius: var(--radius); font-size: 0.92rem; transition: transform .2s cubic-bezier(.34,1.56,.64,1), background .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .btn.solid{ background: var(--green-deep); color: var(--bg); }
+  .btn.solid:hover{ background: var(--green); border-color: var(--green); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(52,67,58,0.25); }
+  .btn.solid:active{ transform: translateY(-1px) scale(0.98); }
+  .btn.ghost:hover{ background: rgba(52,67,58,0.06); transform: translateY(-3px); }
+  .btn.ghost:active{ transform: translateY(-1px) scale(0.98); }
+
+  section{ padding: 80px 0; border-top: 1px solid var(--line); }
+  .section-label{ font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+  section h2{ font-size: clamp(1.8rem, 3.6vw, 2.5rem); color: var(--green-deep); margin-bottom: 28px; }
+
+  /* scroll progress bar */
+  #scroll-progress{ position:fixed; top:0; left:0; height:3px; background: var(--green); z-index:100; width:0%; transition: width .1s ease-out; }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items:start; }
+  @media (max-width: 780px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-grid p{ margin-bottom: 16px; color: var(--ink-soft); }
+  .fact-list{ list-style:none; border-top:1px solid var(--line); }
+  .fact-list li{ display:flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; transition: padding-left .2s ease; }
+  .fact-list li:hover{ padding-left: 6px; background: rgba(92,113,97,0.05); }
+  .fact-list span:first-child{ color: var(--ink-soft); }
+  .fact-list span:last-child{ text-align:right; font-weight: 500; }
+  .profile-photo{ width: 132px; height: 132px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; border: 1px solid var(--line); transition: transform .3s ease; }
+  .profile-photo:hover{ transform: scale(1.04) rotate(-1deg); }
+
+  /* TIMELINE / PROJECTS */
+  .timeline{ position:relative; }
+  .timeline::before{
+    content:''; position:absolute; left: 84px; top: 6px; bottom: 6px; width: 1px; background: var(--line);
+  }
+  @media (max-width: 640px){ .timeline::before{ left: 0; } }
+  .proj{
+    display:grid; grid-template-columns: 84px 1fr; gap: 32px; padding: 34px 24px; position: relative;
+    margin: 0 -24px; border-radius: 6px; transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+  }
+  @media (max-width: 640px){ .proj{ grid-template-columns: 1fr; gap: 10px; } }
+  .proj:hover{ background: var(--card); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(38,48,42,0.08); }
+  .proj + .proj{ border-top: 1px solid var(--line); }
+  .proj:hover + .proj, .proj:has(+ .proj:hover){ border-top-color: transparent; }
+  .proj .yr{ font-size: 0.85rem; color: var(--green); padding-top: 4px; font-weight: 500; }
+  .proj .dot{ position:absolute; left: 80px; top: 40px; width:9px; height:9px; border-radius:50%; background: var(--green); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+  .proj:hover .dot{ transform: scale(1.6); }
+  @media (max-width: 640px){ .proj .dot{ display:none; } }
+  .proj-card h3{ font-size: 1.35rem; color: var(--ink); margin-bottom: 8px; }
+  .proj-card .tag{ display:inline-block; font-size: 0.75rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--green-deep); background: rgba(92,113,97,0.12); padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
+  .tag-capstone{ color:#2E5266 !important; background: rgba(46,82,102,0.12) !important; }
+  .tag-hardware{ color:#8A4B32 !important; background: rgba(138,75,50,0.12) !important; }
+  .tag-neuro{ color:#5B3A6B !important; background: rgba(91,58,107,0.12) !important; }
+  .tag-thesis{ color:#3D6B4F !important; background: rgba(61,107,79,0.12) !important; }
+  .tag-instr{ color:#8A6D1E !important; background: rgba(138,109,30,0.12) !important; }
+  .proj-card p{ color: var(--ink-soft); max-width: 620px; margin-bottom: 14px; }
+  .details-link{ font-size: 0.92rem; border-bottom: 1px solid var(--green-deep); padding-bottom: 2px; transition: opacity .2s ease; display:inline-flex; align-items:center; gap: 4px; }
+  .details-link:hover{ opacity: 0.6; }
+  .details-link .arrow{ display:inline-block; transition: transform .25s ease; }
+  .details-link:hover .arrow{ transform: translateX(5px); }
+
+  /* CV */
+  .cv-block{ margin-bottom: 34px; }
+  .cv-block h3{ font-size: 1.1rem; color: var(--green-deep); margin-bottom: 14px; font-family:'DM Sans'; font-weight:700; letter-spacing: 0.02em;}
+  .cv-row{ display:flex; justify-content:space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; }
+  .cv-row .role{ font-weight: 500; }
+  .cv-row .meta{ color: var(--ink-soft); text-align:right; white-space:nowrap; }
+
+  /* CONTACT */
+  .contact-links{ display:flex; gap: 26px; flex-wrap:wrap; margin-top: 10px; }
+  .contact-links a{ font-size: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+  .contact-links a:hover{ border-color: var(--green-deep); }
+
+  footer{ padding: 40px 0; text-align:center; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+  /* PROJECT DETAIL PAGES */
+  .detail-page{ display:none; }
+  .detail-page.active{ display:block; }
+  #home-page.active{ display:block; }
+  #home-page{ display:none; }
+
+  .detail-hero{ padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .back-link{ font-size: 0.9rem; color: var(--green); display:inline-block; margin-bottom: 24px; }
+  .back-link:hover{ color: var(--green-deep); }
+  .detail-hero .tag{ display:inline-block; font-size: 0.75rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--green-deep); background: rgba(92,113,97,0.12); padding: 4px 10px; border-radius: 999px; margin-bottom: 16px; }
+  .detail-hero h1{ font-size: clamp(2rem, 5vw, 3rem); color: var(--green-deep); max-width: 760px; }
+  .detail-hero .meta-row{ margin-top: 16px; color: var(--ink-soft); font-size: 0.95rem; }
+
+  .detail-body{ padding: 56px 0; }
+  .detail-body h2{ font-size: 1.4rem; color: var(--green-deep); margin: 40px 0 16px; }
+  .detail-body h2:first-child{ margin-top: 0; }
+  .detail-body p{ color: var(--ink-soft); max-width: 720px; margin-bottom: 16px; }
+  .detail-body ul{ padding-left: 20px; color: var(--ink-soft); max-width: 720px; margin-bottom: 16px; }
+  .detail-body li{ margin-bottom: 8px; }
+
+  .img-placeholder{
+    width:100%; aspect-ratio: 16/9; background: var(--bg-alt); border: 1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center; color: var(--ink-soft);
+    font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 24px 0; border-radius: var(--radius);
+  }
+  .data-table{ width:100%; border-collapse: collapse; margin: 20px 0 30px; font-size: 0.92rem; }
+  .data-table th, .data-table td{ text-align:left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .data-table th{ color: var(--green-deep); font-weight: 700; background: var(--bg-alt); }
+  .data-table td{ color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<nav>
+  <div class="wrap">
+    <a href="#home" class="brand">Sandra Trajkovski</a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#cv">CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="home-page" class="active">
+
+  <header class="hero wrap">
+    <div class="eyebrow reveal">Bioengineer &middot; UC Berkeley MEng '26</div>
+    <h1 class="reveal">I build instruments that turn raw physiological signals into decisions clinicians can trust.</h1>
+    <p class="lead reveal">From lead-detection spectrophotometers to EEG pipelines predicting recovery after cardiac arrest, my work sits at the intersection of hands-on device engineering and signal processing.</p>
+    <div class="cta-row reveal">
+      <a href="#projects" class="btn solid">View Projects</a>
+      <a href="#contact" class="btn ghost">Get in Touch</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-label reveal">About</div>
+      <h2 class="reveal">Clinical grounding, engineering rigor.</h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>I'm a recent MEng Bioengineering graduate from UC Berkeley (Magna Cum Laude), with a BS in Biomedical Engineering from CSULB (2021&ndash;2025, Summa Cum Laude, Engineering Honors Program). My MEng capstone, in collaboration with UCSF Health, built an EEG-based neurological outcome prediction pipeline for post-cardiac arrest patients.</p>
+          <p>I'm bilingual in English and French, and I'm currently based in Long Beach, CA, open to roles across San Diego and the Bay Area.</p>
+          <p>Before graduate school, I worked as a nursing assistant in Surgery/Oncology and Medical Imaging at Mount Sinai Hospital Toronto, which gives me a clinically grounded perspective on how devices actually get used at the bedside and in the OR.</p>
+        </div>
+        <div class="reveal">
+          <img src="images/profile.jpg" alt="Sandra Trajkovski" class="profile-photo">
+          <ul class="fact-list">
+          <li><span>Education</span><span>MEng Bioengineering, UC Berkeley &mdash; Magna Cum Laude</span></li>
+          <li><span>Undergraduate</span><span>BS BME, CSULB &mdash; Summa Cum Laude, Engineering Honors Program</span></li>
+          <li><span>Languages</span><span>English, French</span></li>
+          <li><span>Based in</span><span>Long Beach, CA</span></li>
+          <li><span>Open to</span><span>San Diego, Bay Area</span></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-label reveal">Projects</div>
+      <h2 class="reveal">Selected work, most recent first.</h2>
+      <div class="timeline">
+
+        <div class="proj reveal">
+          <div class="yr">2025&ndash;2026</div>
+          <div class="dot"></div>
+          <div class="proj-card">
+            <span class="tag tag-capstone">Capstone &middot; UCSF Health</span>
+            <h3>Predicting Coma Recovery from Brain Signals</h3>
+            <p>Full pipeline from raw EEG through CHAMPAGNE source localization, 86 Desikan-Killiany atlas ROIs, feature extraction, and ProtoPNet classification, deployed to a bedside dashboard concept. Trained on ~1,000 patients across 7 hospitals, achieving 93% AUC-ROC. Manuscript in preparation for peer-reviewed publication.</p>
+            <a href="#eeg-capstone" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="yr">2025</div>
+          <div class="dot"></div>
+          <div class="proj-card">
+            <span class="tag tag-hardware">Hardware &middot; CSULB</span>
+            <h3>Low-Cost ASL Translation Glove</h3>
+            <p>A $58.71 wearable (vs. ~$3,300 commercial gloves) that translates ASL fingerspelling to text in real time, using Arduino, flex sensors, an accelerometer, and a custom MIT App Inventor mobile app.</p>
+            <a href="#glove" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="yr">2024&ndash;2025</div>
+          <div class="dot"></div>
+          <div class="proj-card">
+            <span class="tag tag-neuro">Neurotech &middot; CSULB</span>
+            <h3>VR-Integrated EEG Brain-Computer Interface</h3>
+            <p>Tested whether presenting SSVEP stimuli in VR (vs. a laptop) improves signal quality using an OpenBCI 19-electrode cap. VR produced significantly stronger SSVEP power at all three tested frequencies (p &lt; 0.05).</p>
+            <a href="#bci" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="yr">Fall 2024</div>
+          <div class="dot"></div>
+          <div class="proj-card">
+            <span class="tag tag-thesis">Honors Thesis &middot; CSULB</span>
+            <h3>Swimming and Feeding Characteristics of Sand Dollar Larvae via Aquavert</h3>
+            <p>Designed and fabricated a microfluidic imaging platform (laser-cut PMMA molds, PDMS casting, plasma bonding, 3D-printed camera mounts) to study how sand dollar larvae respond to food gradients &mdash; hands-on microfabrication and instrumentation work.</p>
+            <a href="#microfluidics" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div class="yr">2024</div>
+          <div class="dot"></div>
+          <div class="proj-card">
+            <span class="tag tag-instr">Instrumentation</span>
+            <h3>Low-Cost Spectrophotometer for Lead Contamination</h3>
+            <p>Designed and validated a low-cost spectrophotometer to detect lead contamination, comparing yellow vs. green LED performance with and without a 3D-printed enclosure across CV% accuracy metrics.</p>
+            <a href="#spectrophotometer" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <div class="wrap">
+      <div class="section-label reveal">CV</div>
+      <h2 class="reveal">Experience &amp; Skills</h2>
+
+      <div class="cv-block reveal">
+        <h3>Education</h3>
+        <div class="cv-row"><span class="role">MEng, Bioengineering &mdash; UC Berkeley (Magna Cum Laude)</span><span class="meta">2025&ndash;2026</span></div>
+        <div class="cv-row"><span class="role">BS, Biomedical Engineering &mdash; CSULB (Summa Cum Laude, Engineering Honors Program)</span><span class="meta">2021&ndash;2025</span></div>
+      </div>
+
+      <div class="cv-block reveal">
+        <h3>Experience</h3>
+        <div class="cv-row"><span class="role">Machine Learning Engineer &mdash; EEG &amp; Biosignal Processing, UCSF Health (manuscript in preparation for publication)</span><span class="meta">Aug 2025 &ndash; May 2026</span></div>
+        <div class="cv-row"><span class="role">Student Researcher &mdash; Microfluidics &amp; Biological Systems, CSULB</span><span class="meta">Apr 2024 &ndash; May 2025</span></div>
+        <div class="cv-row"><span class="role">Teacher Assistant &mdash; Biomedical Signal Processing, CSULB</span><span class="meta">Aug 2024 &ndash; Dec 2024</span></div>
+        <div class="cv-row"><span class="role">Nursing Assistant &mdash; Surgery/Oncology &amp; Medical Imaging, Mount Sinai Hospital Toronto</span><span class="meta">Sep 2019 &ndash; Aug 2023</span></div>
+      </div>
+
+      <div class="cv-block reveal">
+        <h3>Technical Skills</h3>
+        <div class="cv-row"><span class="role">Signal Processing &amp; Analysis</span><span class="meta">MATLAB, Python, source localization, feature extraction</span></div>
+        <div class="cv-row"><span class="role">Machine Learning</span><span class="meta">ProtoPNet, BiLSTM, Hidden Markov Models</span></div>
+        <div class="cv-row"><span class="role">Hardware &amp; Fabrication</span><span class="meta">Arduino, SolidWorks, AutoCAD, 3D printing, circuit design</span></div>
+        <div class="cv-row"><span class="role">Languages</span><span class="meta">English, French</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-label reveal">Contact</div>
+      <h2 class="reveal">Let's talk.</h2>
+      <p class="reveal" style="color:var(--ink-soft); max-width:520px;">Open to roles in medtech, neurotech, and biotech &mdash; based in Long Beach, open to San Diego and the Bay Area.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:sandratrajkovski@berkeley.edu">Email</a>
+        <a href="https://www.linkedin.com/in/sandra-trajkovski" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>&copy; 2026 Sandra Trajkovski</footer>
+</div>
+
+<!-- ============ PROJECT DETAIL: SPECTROPHOTOMETER ============ -->
+<div id="spectrophotometer" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-instr">Instrumentation &middot; 2024</span>
+    <h1>Detecting Lead Contamination with Spectrophotometry</h1>
+    <div class="meta-row">Team project &middot; CSULB</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>Overview</h2>
+    <p>Long Beach apartment complexes need an accurate, low-cost way to detect lead contamination in water before it reaches residents. Commercial spectrophotometers are effective but expensive, so our team built a low-cost, 3D-printed spectrophotometer using an Arduino, a phototransistor, and swappable LED light sources to test whether an accessible design could still deliver reliable readings.</p>
+
+    <img src="images/spectro-final.jpg" alt="Final spectrophotometer with green LED glowing inside the 3D-printed enclosure, wired to an Arduino Uno" style="width:100%; border-radius:2px; margin:24px 0;">
+
+    <h2>Hypothesis</h2>
+    <ul>
+      <li>A yellow LED would detect contamination levels more effectively than a green LED</li>
+      <li>Adding a 3D-printed phototransistor/LED cover and cuvette holder would improve detection consistency by blocking outside light</li>
+    </ul>
+
+    <h2>Design &amp; Method</h2>
+    <p>Green dye at five concentrations simulated lead contamination levels in water samples. Each concentration was measured under a yellow LED and a green LED, both with and without a 3D-printed enclosure (cuvette holder + light-blocking box, designed in SolidWorks and iterated three times to fix fit and light-leak issues). An Arduino Uno circuit converted phototransistor readings to voltage and printed a corresponding safety message.</p>
+
+    <h2>Results</h2>
+    <p>The 3D-printed enclosure meaningfully improved measurement consistency for both LEDs compared to the open-air setup. The green LED with the enclosure held the most consistent readings overall, especially at higher contamination levels. The yellow LED, while slightly less consistent overall, performed better at detecting low-concentration contamination early &mdash; arguably the more clinically important signal for early lead detection.</p>
+
+    <h2>Conclusion &amp; Next Steps</h2>
+    <p>Given that early detection matters most for preventing lead poisoning, the team's recommendation is to move forward with the yellow LED, accepting a modest tradeoff in high-concentration consistency for better sensitivity at the low end. Future iterations would use sturdier, less light-permeable materials for the enclosure and pursue pilot implementation in actual apartment complex water testing.</p>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL: MICROFLUIDICS ============ -->
+<div id="microfluidics" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-thesis">Honors Thesis &middot; CSULB &middot; Fall 2024</span>
+    <h1>Swimming and Feeding Characteristics of Sand Dollar Larvae via Aquavert</h1>
+    <div class="meta-row">University Honors Program Thesis</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>Overview</h2>
+    <p>Larval Pacific sand dollars (<em>Dendraster excentricus</em>) rely on chemosensing to locate food and avoid predators during their earliest life stages, but their vertical swimming and feeding behavior in response to food gradients is hard to study in the field. This thesis used a custom microfluidic imaging platform, Aquavert, to observe how low-fed sand dollar larvae respond to algae concentration gradients across their first 14 days post-fertilization.</p>
+
+    <h2>Method</h2>
+    <ul>
+      <li>Spawned and cultured <em>Dendraster excentricus</em> larvae from adults collected in San Pedro, CA, feeding them unicellular red algae on a controlled low-feeding schedule</li>
+      <li>Fabricated Y-shaped microfluidic chips from laser-cut PMMA molds and PDMS, plasma-bonded to glass slides, to create a two-inlet flow boundary between seawater and algae</li>
+      <li>Built Aquavert, a custom vertical imaging system combining a 2x objective, tube lens, and 3D-printed camera and chip-holder mounts, to record larval position relative to the flow boundary</li>
+      <li>Ran paired trials varying which inlet carried algae (top vs. bottom) and algae concentration (low vs. high) across days 1&ndash;14 post-fertilization</li>
+    </ul>
+
+    <h2>Results</h2>
+    <p>Larvae consistently oriented toward and remained near the algae inlet across trials, regardless of whether it was positioned on the top or bottom channel. Flow rate mattered: rates at or below 1.5 mL/hr let larvae stay within the chip and feed comfortably, while higher flow rates gave a clearer visual of the algae boundary but flushed larvae out of the imaging area.</p>
+
+    <h2>Why it matters</h2>
+    <p>This was hands-on validation that a low-cost, custom-fabricated microfluidic and imaging system can capture real chemosensory behavior in marine larvae &mdash; the same fabrication skills (photolithography-adjacent laser cutting, PDMS casting, plasma bonding, 3D-printed fixtures) that carry directly into device prototyping in medtech.</p>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL: BCI ============ -->
+<div id="bci" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-neuro">Neurotech &middot; CSULB &middot; 2024&ndash;2025</span>
+    <h1>Integration and Optimization of Virtual Reality in EEG-Based Brain-Computer Interfaces</h1>
+    <div class="meta-row">Team project &middot; CSULB</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>Overview</h2>
+    <p>Brain-computer interfaces that rely on steady-state visually evoked potentials (SSVEP) &mdash; a neural response to a flickering visual stimulus at a specific frequency &mdash; typically present that stimulus on a laptop screen. This project tested whether presenting the same stimulus inside a fully immersive VR environment would produce a stronger, more usable SSVEP signal, since VR is known to improve patient engagement in other clinical contexts.</p>
+
+    <img src="images/bci-poster.jpg" alt="Research poster: Integration and Optimization of Virtual Reality in EEG-Based Brain Computer Interfaces" style="width:100%; border-radius:2px; margin:24px 0;">
+
+    <h2>Method</h2>
+    <ul>
+      <li>Recorded EEG from 2 subjects using a standard 19-electrode OpenBCI cap, focusing on parietal, temporal, and occipital electrodes (strongest visual response region)</li>
+      <li>Presented flickering stimuli at 13Hz, 15Hz, and 17Hz, each for 5-minute segments (10 trials per frequency, plus a relaxed baseline), once in VR and once on a laptop</li>
+      <li>Preprocessed signals with common average referencing, bandpass filtering, and whitening, then computed normalized target-to-non-target frequency power ratios per trial</li>
+    </ul>
+
+    <h2>Results</h2>
+    <p>SSVEP power was significantly higher in the VR condition than on the laptop at all three stimulus frequencies (p &lt; 0.05 for 13Hz, 15Hz, and 17Hz). Topographic maps showed the O1 electrode (lower-left occipital site) consistently produced the strongest response across both conditions and all three frequencies.</p>
+
+    <h2>Conclusion</h2>
+    <p>VR is a viable &mdash; and in this case stronger &mdash; stimulus platform for SSVEP-based brain-computer interfaces, supporting future use in therapeutic and rehabilitation applications. Planned follow-up work includes a machine learning pipeline for automated signal classification and live data processing.</p>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL: GLOVE ============ -->
+<div id="glove" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-hardware">Hardware &middot; CSULB &middot; 2025</span>
+    <h1>Low-Cost ASL Translation Glove</h1>
+    <div class="meta-row">Team project &middot; CSULB &middot; Total build cost: $58.71</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>Overview</h2>
+    <p>Roughly 11 million people in the U.S. are deaf or hard of hearing, but only around 500,000 people are fluent in ASL &mdash; leaving many deaf individuals dependent on a human interpreter, especially in emergencies. This project built a wearable glove that interprets ASL fingerspelling into English text in real time through a companion smartphone app, at a fraction of the cost of commercial sign-language translation gloves (~$3,300 retail).</p>
+
+    <img src="images/glove-photo.jpg" alt="Labeled photo of the ASL translation glove showing the smartphone app, flex sensors, accelerometer, and HC-05 Bluetooth module" style="width:100%; border-radius:2px; margin:24px 0;">
+
+    <h2>Bill of Materials</h2>
+    <table class="data-table">
+      <tr><th>Part</th><th>Qty</th><th>Cost</th></tr>
+      <tr><td>Flex sensors</td><td>4</td><td>$33.35</td></tr>
+      <tr><td>MPU-6050 accelerometer</td><td>1</td><td>$9.99</td></tr>
+      <tr><td>HC-05 Bluetooth 2.0</td><td>1</td><td>$9.99</td></tr>
+      <tr><td>Arduino Uno kit</td><td>1</td><td>$27.90</td></tr>
+      <tr><td>Glove</td><td>1</td><td>$1.00</td></tr>
+      <tr><td>9V battery</td><td>1</td><td>$4.50</td></tr>
+    </table>
+
+    <h2>Design &amp; Build</h2>
+    <ul>
+      <li>Four flex sensors (one per finger, excluding the thumb) change resistance as they bend, letting the Arduino read finger position as an analog signal</li>
+      <li>An MPU-6050 accelerometer captured hand orientation across 3 axes to help distinguish gestures that look similar in finger position alone</li>
+      <li>Arduino firmware compared live sensor readings against reference values for each letter (A&ndash;Z) within a tolerance window, then sent a matched letter over HC-05 Bluetooth</li>
+      <li>A custom MIT App Inventor app received the Bluetooth signal and displayed the translated text live</li>
+    </ul>
+
+    <img src="images/glove-circuit.jpg" alt="Circuit diagram showing flex sensors, accelerometer, Arduino Uno, and HC-05 Bluetooth wiring" style="width:100%; border-radius:2px; margin:24px 0; background:white; padding:16px;">
+
+    <h2>Demo</h2>
+    <div style="position:relative; width:100%; padding-top:56.25%; margin:24px 0; border-radius:2px; overflow:hidden; background:var(--bg-alt);">
+      <iframe src="https://drive.google.com/file/d/1Oe-S_yLD5CQGv3YU0ZigtoMf2L58z8SB/preview" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allow="autoplay" allowfullscreen></iframe>
+    </div>
+
+    <h2>Challenges &amp; Limitations</h2>
+    <ul>
+      <li>The Arduino Uno didn't have enough analog input pins for all 5 sensors, so the final build used only 4 (thumb excluded)</li>
+      <li>The wired breadboard setup was fragile and limited hand mobility while signing</li>
+      <li>Soldering wires directly to the flex sensors was failure-prone</li>
+      <li>The HC-05 Bluetooth module had recurring connectivity issues that made repeat demos harder</li>
+    </ul>
+
+    <h2>Future Steps</h2>
+    <p>Planned next steps include iOS support, a pre-established word bank, text-to-speech output for the non-ASL speaker, an enclosed compartment for the electronics, and a second glove synced to the first for two-handed signs.</p>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL: EEG CAPSTONE ============ -->
+<div id="eeg-capstone" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-capstone">Capstone &middot; UC Berkeley MEng &times; UCSF Health &middot; 2025&ndash;2026</span>
+    <h1>Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals</h1>
+    <div class="meta-row">MEng Capstone, in collaboration with UCSF Health</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>The Problem</h2>
+    <p>Subjective coma prognoses can lead to premature withdrawal of life support. Of an estimated 255,000 annual coma deaths from withdrawn life support, over 48,000 may be preventable &mdash; cases where a patient showed signs of recovery after doctors determined, without objective evidence, that recovery was unlikely.</p>
+
+    <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" style="width:100%; border-radius:2px; margin:24px 0;">
+
+    <h2>Pipeline</h2>
+    <ul>
+      <li><strong>Source localization:</strong> CHAMPAGNE algorithm applied to raw EEG to localize neural activity to specific brain regions</li>
+      <li><strong>Atlas mapping:</strong> Activity mapped onto 86 Desikan-Killiany atlas regions of interest (ROIs)</li>
+      <li><strong>Feature extraction:</strong> Amplitude, relative band power, and other features computed across 1,275 total feature dimensions per patient</li>
+      <li><strong>Prototype classification:</strong> ProtoPNet applied to identify interpretable EEG pattern prototypes tied to outcome classes</li>
+      <li><strong>Trajectory prediction:</strong> Dynamic models (as opposed to static survival/death predictions) project how a patient's recovery probability develops over time</li>
+      <li><strong>Clinical translation:</strong> Findings mocked into a bedside tablet dashboard combining outcome predictions, brain signal strength, source localization, and raw EEG</li>
+    </ul>
+
+    <h2>Data &amp; Results</h2>
+    <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery &mdash; with the ProtoPNet and 3D trajectory-embedding stages providing interpretable, clinician-facing explanations for each prediction rather than a black-box score.</p>
+
+    <h2>Why It Matters</h2>
+    <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment &mdash; directly addressing the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in preparation for peer-reviewed publication.</p>
+  </div>
+</div>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hash-based page routing
+  const pageIds = ['home-page','spectrophotometer','microfluidics','bci','glove','eeg-capstone'];
+  function routeToHash(){
+    let hash = window.location.hash.replace('#','') || 'home';
+    if(hash === 'home' || hash === 'about' || hash === 'projects' || hash === 'cv' || hash === 'contact'){
+      showPage('home-page');
+      if(hash !== 'home'){
+        setTimeout(()=>{ document.getElementById(hash).scrollIntoView({behavior:'smooth'}); }, 50);
+      } else {
+        window.scrollTo(0,0);
+      }
+      return;
+    }
+    if(pageIds.includes(hash)){
+      showPage(hash);
+      window.scrollTo(0,0);
+    }
+  }
+  function showPage(id){
+    pageIds.forEach(pid => {
+      document.getElementById(pid).classList.toggle('active', pid === id);
+    });
+    document.querySelectorAll('.reveal').forEach(el => { el.classList.add('in'); });
+  }
+  window.addEventListener('hashchange', routeToHash);
+  routeToHash();
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+</script>
+
+</body>
+</html>
