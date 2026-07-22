@@ -111,6 +111,7 @@
   .proj-neuro{ border-left-color: #5B3A6B; background: rgba(91,58,107,0.04); }
   .proj-thesis{ border-left-color: #3D6B4F; background: rgba(61,107,79,0.04); }
   .proj-instr{ border-left-color: #8A6D1E; background: rgba(138,109,30,0.04); }
+  .proj-medical{ border-left-color: #2E6B6B; background: rgba(46,107,107,0.04); }
   .proj .yr-wrap{ display:flex; align-items:center; gap: 12px; padding-top: 6px; }
   .proj .yr{ font-size: 0.82rem; color: var(--green); font-weight: 500; white-space: nowrap; }
   .proj .dot{ flex: 0 0 auto; width:9px; height:9px; border-radius:50%; background: var(--green); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
@@ -131,6 +132,7 @@
   .tag-neuro{ color:#5B3A6B !important; background: rgba(91,58,107,0.12) !important; }
   .tag-thesis{ color:#3D6B4F !important; background: rgba(61,107,79,0.12) !important; }
   .tag-instr{ color:#8A6D1E !important; background: rgba(138,109,30,0.12) !important; }
+  .tag-medical{ color:#2E6B6B !important; background: rgba(46,107,107,0.12) !important; }
   .proj-card p{ color: var(--ink-soft); max-width: 620px; margin-bottom: 14px; }
   .details-link{ font-size: 0.92rem; border-bottom: 1px solid var(--green-deep); padding-bottom: 2px; transition: opacity .2s ease; display:inline-flex; align-items:center; gap: 4px; }
   .details-link:hover{ opacity: 0.6; }
@@ -299,6 +301,16 @@
       <p class="reveal" style="color: var(--ink-soft); font-size: 0.95rem; margin-top: -18px; margin-bottom: 28px;">Click into any project below for details, data, and photos of the actual builds.</p>
       <div class="timeline">
 
+        <div class="proj proj-medical reveal">
+          <div class="yr-wrap"><div class="dot"></div><div class="yr">Spring 2022</div></div>
+          <div class="proj-card">
+            <span class="tag tag-medical">Medical Device &middot; CSULB</span>
+            <h3>Adjustable Medical Face Shield</h3>
+            <p>Designed a multi-part, adjustable face shield assembly in SolidWorks as a team project, with interchangeable band components and snap-ring fasteners for a customizable fit.</p>
+            <a href="#faceshield" class="details-link">View details <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
         <div class="proj proj-instr reveal">
           <div class="yr-wrap"><div class="dot"></div><div class="yr">Fall 2024</div></div>
           <div class="proj-card">
@@ -445,6 +457,34 @@
   </section>
 
   <footer>&copy; 2026 Sandra Trajkovski</footer>
+</div>
+
+<!-- ============ PROJECT DETAIL: FACE SHIELD ============ -->
+<div id="faceshield" class="detail-page">
+  <div class="detail-hero wrap">
+    <a href="#projects" class="back-link">&larr; Back to Projects</a>
+    <span class="tag tag-medical">Medical Device &middot; CSULB &middot; Spring 2022</span>
+    <h1>Adjustable Medical Face Shield</h1>
+    <div class="meta-row">Team project &middot; ENGR 170</div>
+  </div>
+  <div class="detail-body wrap">
+    <h2>Overview</h2>
+    <p>As a team project in ENGR 170, we designed a wearable protective face shield with an adjustable band system, modeled fully in SolidWorks as a multi-part assembly. The goal was a shield that could adjust to fit different head sizes securely, rather than a single fixed-size design.</p>
+
+    <h2>Design &amp; Assembly</h2>
+    <p>The shield was broken down into seven individual SolidWorks parts, then combined into a single assembly file so the fit mechanism could be tested and adjusted as a system rather than in isolation:</p>
+    <ul>
+      <li><strong>Shield</strong> &mdash; the main protective panel</li>
+      <li><strong>Inner band and inner band pad</strong> &mdash; the contact surface against the wearer's head</li>
+      <li><strong>Outer bands and back band</strong> &mdash; the adjustable structural frame holding the shield in place</li>
+      <li><strong>Snap rings (two sizes) and screw</strong> &mdash; fasteners allowing the band size to be adjusted and locked in place</li>
+    </ul>
+    <p>Breaking the design into this many discrete, individually modeled parts meant each component could be revised on its own (adjusting band curvature or snap ring tolerance, for example) without having to rebuild the entire shield.</p>
+    <p>Each part also had its own dimensioned engineering drawing, and we ran finite element analysis (FEA) on the design to check how it would hold up under load before considering it finished.</p>
+
+    <h2>Why It Matters</h2>
+    <p>This was an early, hands-on introduction to designing a wearable medical device as an assembly of interacting parts rather than a single static model, including thinking through fasteners and adjustability, not just the main protective component.</p>
+  </div>
 </div>
 
 <!-- ============ PROJECT DETAIL: SPECTROPHOTOMETER ============ -->
@@ -690,7 +730,7 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // Hash-based page routing
-  const pageIds = ['home-page','spectrophotometer','microfluidics','bci','glove','eeg-capstone'];
+  const pageIds = ['home-page','faceshield','spectrophotometer','microfluidics','bci','glove','eeg-capstone'];
   function routeToHash(){
     let hash = window.location.hash.replace('#','') || 'home';
     if(hash === 'home' || hash === 'about' || hash === 'projects' || hash === 'cv' || hash === 'contact'){
