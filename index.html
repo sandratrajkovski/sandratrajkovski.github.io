@@ -228,6 +228,28 @@
   .data-table th, .data-table td{ text-align:left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
   .data-table th{ color: var(--green-deep); font-weight: 700; background: var(--bg-alt); }
   .data-table td{ color: var(--ink-soft); }
+
+  /* stat row for EEG-Twin highlights */
+  .stat-row{
+    display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 32px;
+  }
+  .stat-card{
+    flex: 1; min-width: 140px; padding: 18px 20px; border-radius: 10px;
+    background: rgba(46,82,102,0.06); border: 1px solid rgba(46,82,102,0.18);
+    text-align: center;
+  }
+  .stat-card .stat-num{ font-family: 'DM Serif Display', serif; font-size: 2rem; color: #2E5266; display:block; }
+  .stat-card .stat-label{ font-size: 0.78rem; color: var(--ink-soft); margin-top: 4px; display:block; line-height: 1.4; }
+
+  /* divider between capstone sections */
+  .section-divider{
+    border: none; border-top: 1px dashed var(--line); margin: 48px 0;
+  }
+  .section-banner{
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-banner::after{ content: ''; flex: 1; height: 1px; background: var(--line); }
 </style>
 </head>
 <body>
@@ -688,6 +710,47 @@
 
     <h2>Why It Matters</h2>
     <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment, which directly addresses the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in the works for peer-reviewed publication.</p>
+
+    <!-- EEG-Twin NCS Poster section -->
+    <hr class="section-divider">
+    <div class="section-banner">NCS 2026 Conference Poster</div>
+
+    <h2>EEG-Twin: Trajectory-Aware Digital Twin for Neurological Outcome Prediction</h2>
+    <p>This work was presented as a poster at the Neurocritical Care Society (NCS) annual meeting. The EEG-Twin framework extends the capstone pipeline into a causal, hourly-updating digital twin that not only predicts outcome but also forecasts the patient's next hour of EEG and retrieves the most similar prior patients with known outcomes.</p>
+
+    <img src="images/eeg-twin-poster.jpg" alt="NCS 2026 poster: EEG-Twin digital twin framework for neurological outcome prediction after cardiac arrest" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <span class="stat-num">0.94</span>
+        <span class="stat-label">AUROC on full recording<br>(95% CI 0.91&ndash;0.96, n&nbsp;=&nbsp;299)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">0.91</span>
+        <span class="stat-label">AUROC with only 12 h of EEG<br>(n&nbsp;=&nbsp;98 patients)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">78%</span>
+        <span class="stat-label">Poor outcomes identified<br>at &le;5% false-positive rate</span>
+      </div>
+    </div>
+
+    <h2>EEG-Twin Pipeline</h2>
+    <p>Continuous EEG is processed hourly across the first 84 hours post-resuscitation. Each hour the system:</p>
+    <ul>
+      <li><strong>Segments</strong> the EEG into 5-minute windows</li>
+      <li><strong>Phenotypes</strong> each segment against 45 learned EEG prototypes, assigning 1 of 8 ACNS clinical states via ProtoPNet</li>
+      <li><strong>Embeds</strong> each segment onto a 3D sphere using CEBRA, so each patient's recording becomes a visible trajectory through EEG-state space</li>
+      <li><strong>Summarizes</strong> each hour into 98 interpretable features plus 5 admission variables</li>
+      <li><strong>Predicts + forecasts</strong> using a causal Transformer ensemble (10 models): outputs an hourly P(good outcome) and a forecast of the next hour of EEG</li>
+      <li><strong>Retrieves</strong> the 10 most similar prior patients with known outcomes, as of that hour, to ground each prediction in real cases</li>
+    </ul>
+
+    <h2>Key Finding</h2>
+    <p>Recovery and non-recovery trace visually distinct paths through EEG-state space. Patients who recovered showed continuous background activity transitioning to GRDA; patients who did not recover showed burst suppression progressing to GPDs. The causal design means predictions at any hour use only EEG recorded up to that point, matching real clinical constraints.</p>
+
+    <p style="margin-top: 16px;">Data: I-CARE (PhysioNet 2023) &mdash; 7 hospitals, 994 patients, 525,705 five-minute EEG segments. Code: <a href="https://github.com/edilbertoamorim/ICARE_Twin" target="_blank" style="border-bottom: 1px solid var(--green-deep);">github.com/edilbertoamorim/ICARE_Twin</a></p>
   </div>
 </div>
 
