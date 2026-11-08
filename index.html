@@ -287,6 +287,30 @@
   .picker-title{ font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
   .picker-desc{ font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
 
+  /* stat placeholder for EEG-Twin card */
+  .picker-thumb-stat{
+    background: linear-gradient(135deg, #1a2f3a 0%, #2E5266 60%, #3d6b7a 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .picker-stat-grid{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 100%; height: 100%;
+    padding: 0;
+  }
+  .picker-stat{
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 16px 8px; border: 1px solid rgba(255,255,255,0.08);
+    transition: background .2s ease;
+  }
+  .picker-card:hover .picker-stat{ background: rgba(255,255,255,0.05); }
+  .picker-stat-num{
+    font-family: 'DM Serif Display', serif; font-size: 2rem; color: #fff;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .picker-stat-lbl{
+    font-size: 0.7rem; color: rgba(255,255,255,0.65); text-align: center;
+    text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.3;
+  }
+
   /* back nav inside panels */
   .panel-nav{ padding: 20px 0 0; }
   .back-to-picker{
@@ -743,12 +767,17 @@
       </button>
 
       <button class="picker-card" onclick="showEegPanel('panel-eegtwin', this)">
-        <div class="picker-thumb-wrap">
-          <img src="images/eeg-twin-poster.jpg" alt="EEG-Twin NCS poster thumbnail" class="picker-thumb">
+        <div class="picker-thumb-wrap picker-thumb-stat">
+          <div class="picker-stat-grid">
+            <div class="picker-stat"><span class="picker-stat-num">0.94</span><span class="picker-stat-lbl">AUROC</span></div>
+            <div class="picker-stat"><span class="picker-stat-num">994</span><span class="picker-stat-lbl">patients</span></div>
+            <div class="picker-stat"><span class="picker-stat-num">78%</span><span class="picker-stat-lbl">identified at ≤5% FPR</span></div>
+            <div class="picker-stat"><span class="picker-stat-num">84h</span><span class="picker-stat-lbl">hourly prediction window</span></div>
+          </div>
           <div class="picker-thumb-overlay">View project &rarr;</div>
         </div>
         <div class="picker-info">
-          <span class="picker-tag tag-capstone" style="background:rgba(91,58,107,0.12); color:#5B3A6B;">NCS 2026 Conference Poster</span>
+          <span class="picker-tag" style="background:rgba(91,58,107,0.12); color:#5B3A6B;">NCS 2026 Conference Poster</span>
           <div class="picker-title">EEG-Twin: Trajectory-Aware Digital Twin</div>
           <div class="picker-desc">0.94 AUROC · Causal Transformer · 994 patients · NCS Annual Meeting</div>
         </div>
