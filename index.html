@@ -251,28 +251,49 @@
   }
   .section-banner::after{ content: ''; flex: 1; height: 1px; background: var(--line); }
 
-  /* TAB BAR */
-  .tab-bar{
-    display: flex; gap: 0; border-bottom: 2px solid var(--line);
-    margin-top: 0; background: var(--bg);
-    position: sticky; top: 68px; z-index: 40;
+  /* PICKER (card version) */
+  .picker-wrap{ padding: 48px 0 40px; }
+  .picker-intro{ font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 24px; letter-spacing: 0.01em; }
+  .picker-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 680px){ .picker-grid{ grid-template-columns: 1fr; } }
+
+  .picker-card{
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    overflow: hidden; cursor: pointer; text-align: left;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, border-color .25s ease;
+    padding: 0; font-family: 'DM Sans', sans-serif;
   }
-  .tab-btn{
-    flex: 1; max-width: 320px; padding: 18px 24px; background: none; border: none;
-    border-bottom: 3px solid transparent; margin-bottom: -2px;
-    cursor: pointer; text-align: left; transition: background .2s ease, border-color .2s ease;
-    font-family: 'DM Sans', sans-serif;
+  .picker-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(38,48,42,0.14);
+    border-color: rgba(46,82,102,0.35);
   }
-  .tab-btn:hover{ background: rgba(92,113,97,0.06); }
-  .tab-btn.active{ border-bottom-color: #2E5266; background: rgba(46,82,102,0.04); }
-  .tab-label{
-    display: block; font-size: 1rem; font-weight: 600; color: var(--ink);
-    font-family: 'DM Serif Display', serif;
+  .picker-thumb-wrap{ position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden; background: var(--bg-alt); }
+  .picker-thumb{ width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .picker-card:hover .picker-thumb{ transform: scale(1.04); }
+  .picker-thumb-overlay{
+    position: absolute; inset: 0; background: rgba(46,82,102,0.72);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.03em;
+    opacity: 0; transition: opacity .25s ease;
   }
-  .tab-btn.active .tab-label{ color: #2E5266; }
-  .tab-sub{ display: block; font-size: 0.75rem; color: var(--ink-soft); margin-top: 3px; }
-  .tab-panel{ display: none; }
-  .tab-panel.active{ display: block; }
+  .picker-card:hover .picker-thumb-overlay{ opacity: 1; }
+  .picker-info{ padding: 20px 22px 24px; }
+  .picker-tag{
+    display: inline-block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #2E5266; background: rgba(46,82,102,0.12); padding: 4px 10px;
+    border-radius: 999px; margin-bottom: 10px;
+  }
+  .picker-title{ font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+  .picker-desc{ font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
+
+  /* back nav inside panels */
+  .panel-nav{ padding: 20px 0 0; }
+  .back-to-picker{
+    background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; color: var(--green); padding: 0;
+  }
+  .back-to-picker:hover{ color: var(--green-deep); }
 </style>
 </head>
 <body>
@@ -695,7 +716,7 @@
   </div>
 </div>
 
-<!-- ============ PROJECT DETAIL: EEG CAPSTONE — TAB VERSION ============ -->
+<!-- ============ PROJECT DETAIL: EEG CAPSTONE — CARD VERSION ============ -->
 <div id="eeg-capstone" class="detail-page">
   <div class="detail-hero wrap">
     <a href="#projects" class="back-link">&larr; Back to Projects</a>
@@ -704,18 +725,43 @@
     <div class="meta-row">MEng Capstone &amp; NCS 2026 Conference Work &middot; UC Berkeley &times; UCSF Health</div>
   </div>
 
-  <div class="tab-bar wrap">
-    <button class="tab-btn active" onclick="switchTab('tab-capstone', this)">
-      <span class="tab-label">MEng Capstone</span>
-      <span class="tab-sub">ProtoPNet &middot; 93% AUC &middot; 2026</span>
-    </button>
-    <button class="tab-btn" onclick="switchTab('tab-eegtwin', this)">
-      <span class="tab-label">EEG-Twin @ NCS 2026</span>
-      <span class="tab-sub">Digital Twin &middot; 0.94 AUROC &middot; Conference Poster</span>
-    </button>
+  <!-- Two-card picker -->
+  <div id="eeg-picker" class="picker-wrap wrap">
+    <p class="picker-intro">Two interconnected research projects — select one to explore:</p>
+    <div class="picker-grid">
+
+      <button class="picker-card" onclick="showEegPanel('panel-capstone', this)">
+        <div class="picker-thumb-wrap">
+          <img src="images/eeg-capstone-poster.jpg" alt="Capstone poster thumbnail" class="picker-thumb">
+          <div class="picker-thumb-overlay">View project &rarr;</div>
+        </div>
+        <div class="picker-info">
+          <span class="picker-tag tag-capstone">MEng Capstone · 2026</span>
+          <div class="picker-title">Predicting Coma Recovery with Interpretable ML</div>
+          <div class="picker-desc">ProtoPNet · CHAMPAGNE · 93% AUC-ROC · ~1,000 patients · 7 hospitals</div>
+        </div>
+      </button>
+
+      <button class="picker-card" onclick="showEegPanel('panel-eegtwin', this)">
+        <div class="picker-thumb-wrap">
+          <img src="images/eeg-twin-poster.jpg" alt="EEG-Twin NCS poster thumbnail" class="picker-thumb">
+          <div class="picker-thumb-overlay">View project &rarr;</div>
+        </div>
+        <div class="picker-info">
+          <span class="picker-tag tag-capstone" style="background:rgba(91,58,107,0.12); color:#5B3A6B;">NCS 2026 Conference Poster</span>
+          <div class="picker-title">EEG-Twin: Trajectory-Aware Digital Twin</div>
+          <div class="picker-desc">0.94 AUROC · Causal Transformer · 994 patients · NCS Annual Meeting</div>
+        </div>
+      </button>
+
+    </div>
   </div>
 
-  <div id="tab-capstone" class="tab-panel active">
+  <!-- Panel: Capstone -->
+  <div id="panel-capstone" class="eeg-panel" style="display:none;">
+    <div class="panel-nav wrap">
+      <button class="back-to-picker" onclick="backToPicker()">&larr; Back to overview</button>
+    </div>
     <div class="detail-body wrap">
       <h2>The Problem</h2>
       <p>Subjective coma prognoses can lead to premature withdrawal of life support. An estimated 48,000 of the 255,000 annual deaths from withdrawn life support may be preventable.</p>
@@ -749,7 +795,11 @@
     </div>
   </div>
 
-  <div id="tab-eegtwin" class="tab-panel">
+  <!-- Panel: EEG-Twin -->
+  <div id="panel-eegtwin" class="eeg-panel" style="display:none;">
+    <div class="panel-nav wrap">
+      <button class="back-to-picker" onclick="backToPicker()">&larr; Back to overview</button>
+    </div>
     <div class="detail-body wrap">
       <h2>EEG-Twin: Trajectory-Aware Digital Twin for Neurological Outcome Prediction</h2>
       <p>Presented as a poster at the Neurocritical Care Society (NCS) 2026 annual meeting. EEG-Twin extends the capstone pipeline into a causal, hourly-updating digital twin: it not only predicts outcome but also forecasts the patient's next hour of EEG and retrieves the most similar prior patients with known outcomes.</p>
@@ -810,13 +860,17 @@
   }
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-  // Tab switcher for eeg-capstone
-  function switchTab(panelId, btn){
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(panelId).classList.add('active');
-    btn.classList.add('active');
-    window.scrollTo({ top: document.querySelector('.tab-bar').offsetTop - 80, behavior: 'smooth' });
+  // Card picker for eeg-capstone
+  function showEegPanel(panelId, card){
+    document.getElementById('eeg-picker').style.display = 'none';
+    document.querySelectorAll('.eeg-panel').forEach(p => p.style.display = 'none');
+    document.getElementById(panelId).style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function backToPicker(){
+    document.querySelectorAll('.eeg-panel').forEach(p => p.style.display = 'none');
+    document.getElementById('eeg-picker').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // Typewriter greeting
