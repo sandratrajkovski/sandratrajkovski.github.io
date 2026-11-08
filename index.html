@@ -250,6 +250,29 @@
     color: var(--green); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
   }
   .section-banner::after{ content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  /* TAB BAR */
+  .tab-bar{
+    display: flex; gap: 0; border-bottom: 2px solid var(--line);
+    margin-top: 0; background: var(--bg);
+    position: sticky; top: 68px; z-index: 40;
+  }
+  .tab-btn{
+    flex: 1; max-width: 320px; padding: 18px 24px; background: none; border: none;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    cursor: pointer; text-align: left; transition: background .2s ease, border-color .2s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn:hover{ background: rgba(92,113,97,0.06); }
+  .tab-btn.active{ border-bottom-color: #2E5266; background: rgba(46,82,102,0.04); }
+  .tab-label{
+    display: block; font-size: 1rem; font-weight: 600; color: var(--ink);
+    font-family: 'DM Serif Display', serif;
+  }
+  .tab-btn.active .tab-label{ color: #2E5266; }
+  .tab-sub{ display: block; font-size: 0.75rem; color: var(--ink-soft); margin-top: 3px; }
+  .tab-panel{ display: none; }
+  .tab-panel.active{ display: block; }
 </style>
 </head>
 <body>
@@ -672,85 +695,99 @@
   </div>
 </div>
 
-<!-- ============ PROJECT DETAIL: EEG CAPSTONE ============ -->
+<!-- ============ PROJECT DETAIL: EEG CAPSTONE — TAB VERSION ============ -->
 <div id="eeg-capstone" class="detail-page">
   <div class="detail-hero wrap">
     <a href="#projects" class="back-link">&larr; Back to Projects</a>
     <span class="tag tag-capstone">Capstone &middot; UC Berkeley MEng &times; UCSF Health &middot; 2025&ndash;2026</span>
-    <h1>Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals</h1>
-    <div class="meta-row">MEng Capstone, in collaboration with UCSF Health</div>
+    <h1>EEG-Based Neurological Outcome Prediction After Cardiac Arrest</h1>
+    <div class="meta-row">MEng Capstone &amp; NCS 2026 Conference Work &middot; UC Berkeley &times; UCSF Health</div>
   </div>
-  <div class="detail-body wrap">
-    <h2>The Problem</h2>
-    <p>Subjective coma prognoses can lead to premature withdrawal of life support. An estimated 48,000 of the 255,000 annual deaths from withdrawn life support may be preventable.</p>
-    <p>This project set out to predict coma recovery in a multi-modal fashion, combining brain signal strength, source localization, and interpretable machine learning, to give clinicians an objective, evidence-based tool alongside their own judgment.</p>
 
-    <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
-    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
+  <div class="tab-bar wrap">
+    <button class="tab-btn active" onclick="switchTab('tab-capstone', this)">
+      <span class="tab-label">MEng Capstone</span>
+      <span class="tab-sub">ProtoPNet &middot; 93% AUC &middot; 2026</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-eegtwin', this)">
+      <span class="tab-label">EEG-Twin @ NCS 2026</span>
+      <span class="tab-sub">Digital Twin &middot; 0.94 AUROC &middot; Conference Poster</span>
+    </button>
+  </div>
 
-    <h2>Pipeline</h2>
-    <ul>
-      <li><strong>Source localization:</strong> CHAMPAGNE algorithm applied to raw EEG to localize neural activity to specific brain regions</li>
-      <li><strong>Atlas mapping:</strong> Activity mapped onto 86 Desikan-Killiany atlas regions of interest (ROIs)</li>
-      <li><strong>Feature extraction:</strong> Amplitude, relative band power, and other features computed across 1,275 total feature dimensions per patient</li>
-      <li><strong>Prototype classification:</strong> ProtoPNet applied to identify interpretable EEG pattern prototypes tied to outcome classes</li>
-      <li><strong>Trajectory prediction:</strong> Dynamic models (as opposed to static survival/death predictions) project how a patient's recovery probability develops over time</li>
-      <li><strong>Clinical translation:</strong> Findings mocked into a bedside tablet dashboard combining outcome predictions, brain signal strength, source localization, and raw EEG</li>
-    </ul>
+  <div id="tab-capstone" class="tab-panel active">
+    <div class="detail-body wrap">
+      <h2>The Problem</h2>
+      <p>Subjective coma prognoses can lead to premature withdrawal of life support. An estimated 48,000 of the 255,000 annual deaths from withdrawn life support may be preventable.</p>
+      <p>This project set out to predict coma recovery in a multi-modal fashion, combining brain signal strength, source localization, and interpretable machine learning, to give clinicians an objective, evidence-based tool alongside their own judgment.</p>
 
-    <img src="images/capstone-pipeline-diagram.jpg" alt="Diagram showing the EEG pipeline: 19-channel EEG in 5 minute windows, mapped from sensor space to source space, producing 86 atlas-defined regions of interest" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
-    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
+      <img src="images/eeg-capstone-poster.jpg" alt="Research poster: Predicting Coma Recovery by Applying Human-Interpretable Machine Learning Models to Brain Signals" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+      <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
-    <h2>Data &amp; Results</h2>
-    <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery. The ProtoPNet and 3D trajectory-embedding stages provide interpretable, clinician-facing explanations for each prediction, rather than a black-box score.</p>
+      <h2>Pipeline</h2>
+      <ul>
+        <li><strong>Source localization:</strong> CHAMPAGNE algorithm applied to raw EEG to localize neural activity to specific brain regions</li>
+        <li><strong>Atlas mapping:</strong> Activity mapped onto 86 Desikan-Killiany atlas regions of interest (ROIs)</li>
+        <li><strong>Feature extraction:</strong> Amplitude, relative band power, and other features computed across 1,275 total feature dimensions per patient</li>
+        <li><strong>Prototype classification:</strong> ProtoPNet applied to identify interpretable EEG pattern prototypes tied to outcome classes</li>
+        <li><strong>Trajectory prediction:</strong> Dynamic models (as opposed to static survival/death predictions) project how a patient's recovery probability develops over time</li>
+        <li><strong>Clinical translation:</strong> Findings mocked into a bedside tablet dashboard combining outcome predictions, brain signal strength, source localization, and raw EEG</li>
+      </ul>
 
-    <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
-    <p style="font-size: 0.85rem; color: var(--ink-soft); margin: -2px 0 6px; max-width: 500px;">Six clinical EEG pattern classes (GRDA, GPD, LRDA, LPD, seizure, and burst suppression), each mapped to its own learned prototype and colored by alpha power.</p>
-    <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
+      <img src="images/capstone-pipeline-diagram.jpg" alt="Diagram showing the EEG pipeline: 19-channel EEG in 5 minute windows, mapped from sensor space to source space, producing 86 atlas-defined regions of interest" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+      <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
-    <h2>Why It Matters</h2>
-    <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment, which directly addresses the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in the works for peer-reviewed publication.</p>
+      <h2>Data &amp; Results</h2>
+      <p>The model was trained and evaluated on a subset of roughly 1,000 patients across 7 hospitals in 3 countries, using 1,275 feature dimensions per patient. It achieved 93% AUC-ROC, 83% sensitivity, and 88% specificity in predicting good neurological recovery. The ProtoPNet and 3D trajectory-embedding stages provide interpretable, clinician-facing explanations for each prediction, rather than a black-box score.</p>
 
-    <!-- EEG-Twin NCS Poster section -->
-    <hr class="section-divider">
-    <div class="section-banner">NCS 2026 Conference Poster</div>
+      <img src="images/capstone-prototype-brains.jpg" alt="ProtoPNet prototype brain visualizations showing alpha power patterns across six EEG pattern classes, with lower posterior alpha consistently associated with worse prognosis" class="poster-thumb poster-thumb-lg" onclick="openLightbox(this.src, this.alt)">
+      <p style="font-size: 0.85rem; color: var(--ink-soft); margin: -2px 0 6px; max-width: 500px;">Six clinical EEG pattern classes (GRDA, GPD, LRDA, LPD, seizure, and burst suppression), each mapped to its own learned prototype and colored by alpha power.</p>
+      <div class="img-caption"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Click to enlarge</div>
 
-    <h2>EEG-Twin: Trajectory-Aware Digital Twin for Neurological Outcome Prediction</h2>
-    <p>This work was presented as a poster at the Neurocritical Care Society (NCS) annual meeting. The EEG-Twin framework extends the capstone pipeline into a causal, hourly-updating digital twin that not only predicts outcome but also forecasts the patient's next hour of EEG and retrieves the most similar prior patients with known outcomes.</p>
-
-    <iframe src="images/eeg-twin-poster.pdf" style="width:100%; max-width:720px; height:520px; border:1px solid var(--line); border-radius:6px; display:block; margin:24px 0 6px;" title="NCS 2026 poster: EEG-Twin"></iframe>
-    <div class="img-caption">NCS 2026 · Neurocritical Care Society Annual Meeting</div>
-
-    <div class="stat-row">
-      <div class="stat-card">
-        <span class="stat-num">0.94</span>
-        <span class="stat-label">AUROC on full recording<br>(95% CI 0.91&ndash;0.96, n&nbsp;=&nbsp;299)</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-num">0.91</span>
-        <span class="stat-label">AUROC with only 12 h of EEG<br>(n&nbsp;=&nbsp;98 patients)</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-num">78%</span>
-        <span class="stat-label">Poor outcomes identified<br>at &le;5% false-positive rate</span>
-      </div>
+      <h2>Why It Matters</h2>
+      <p>Multi-modal interpretability gives clinicians objective, evidence-based predictions instead of relying solely on subjective judgment, which directly addresses the premature-withdrawal problem the project set out to solve. A manuscript based on this work is in the works for peer-reviewed publication.</p>
     </div>
+  </div>
 
-    <h2>EEG-Twin Pipeline</h2>
-    <p>Continuous EEG is processed hourly across the first 84 hours post-resuscitation. Each hour the system:</p>
-    <ul>
-      <li><strong>Segments</strong> the EEG into 5-minute windows</li>
-      <li><strong>Phenotypes</strong> each segment against 45 learned EEG prototypes, assigning 1 of 8 ACNS clinical states via ProtoPNet</li>
-      <li><strong>Embeds</strong> each segment onto a 3D sphere using CEBRA, so each patient's recording becomes a visible trajectory through EEG-state space</li>
-      <li><strong>Summarizes</strong> each hour into 98 interpretable features plus 5 admission variables</li>
-      <li><strong>Predicts + forecasts</strong> using a causal Transformer ensemble (10 models): outputs an hourly P(good outcome) and a forecast of the next hour of EEG</li>
-      <li><strong>Retrieves</strong> the 10 most similar prior patients with known outcomes, as of that hour, to ground each prediction in real cases</li>
-    </ul>
+  <div id="tab-eegtwin" class="tab-panel">
+    <div class="detail-body wrap">
+      <h2>EEG-Twin: Trajectory-Aware Digital Twin for Neurological Outcome Prediction</h2>
+      <p>Presented as a poster at the Neurocritical Care Society (NCS) 2026 annual meeting. EEG-Twin extends the capstone pipeline into a causal, hourly-updating digital twin: it not only predicts outcome but also forecasts the patient's next hour of EEG and retrieves the most similar prior patients with known outcomes.</p>
 
-    <h2>Key Finding</h2>
-    <p>Recovery and non-recovery trace visually distinct paths through EEG-state space. Patients who recovered showed continuous background activity transitioning to GRDA; patients who did not recover showed burst suppression progressing to GPDs. The causal design means predictions at any hour use only EEG recorded up to that point, matching real clinical constraints.</p>
+      <iframe src="images/eeg-twin-poster.pdf" style="width:100%; max-width:720px; height:520px; border:1px solid var(--line); border-radius:6px; display:block; margin:24px 0 6px;" title="NCS 2026 poster: EEG-Twin"></iframe>
+      <div class="img-caption">NCS 2026 · Neurocritical Care Society Annual Meeting</div>
 
-    <p style="margin-top: 16px;">Data: I-CARE (PhysioNet 2023) &mdash; 7 hospitals, 994 patients, 525,705 five-minute EEG segments. Code: <a href="https://github.com/edilbertoamorim/ICARE_Twin" target="_blank" style="border-bottom: 1px solid var(--green-deep);">github.com/edilbertoamorim/ICARE_Twin</a></p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-num">0.94</span>
+          <span class="stat-label">AUROC on full recording<br>(95% CI 0.91&ndash;0.96, n&nbsp;=&nbsp;299)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">0.91</span>
+          <span class="stat-label">AUROC with only 12 h of EEG<br>(n&nbsp;=&nbsp;98 patients)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">78%</span>
+          <span class="stat-label">Poor outcomes identified<br>at &le;5% false-positive rate</span>
+        </div>
+      </div>
+
+      <h2>Pipeline</h2>
+      <p>Continuous EEG is processed hourly across the first 84 hours post-resuscitation. Each hour the system:</p>
+      <ul>
+        <li><strong>Segments</strong> the EEG into 5-minute windows</li>
+        <li><strong>Phenotypes</strong> each segment against 45 learned EEG prototypes, assigning 1 of 8 ACNS clinical states via ProtoPNet</li>
+        <li><strong>Embeds</strong> each segment onto a 3D sphere using CEBRA, so each patient's recording becomes a visible trajectory through EEG-state space</li>
+        <li><strong>Summarizes</strong> each hour into 98 interpretable features plus 5 admission variables</li>
+        <li><strong>Predicts + forecasts</strong> using a causal Transformer ensemble (10 models): outputs an hourly P(good outcome) and a forecast of the next hour of EEG</li>
+        <li><strong>Retrieves</strong> the 10 most similar prior patients with known outcomes, as of that hour, to ground each prediction in real cases</li>
+      </ul>
+
+      <h2>Key Finding</h2>
+      <p>Recovery and non-recovery trace visually distinct paths through EEG-state space. Patients who recovered showed continuous background activity transitioning to GRDA; patients who did not recover showed burst suppression progressing to GPDs. The causal design means predictions at any hour use only EEG recorded up to that point, matching real clinical constraints.</p>
+
+      <p style="margin-top: 16px; color: var(--ink-soft); font-size: 0.9rem;">Data: I-CARE (PhysioNet 2023) &mdash; 7 hospitals, 994 patients, 525,705 five-minute EEG segments.</p>
+    </div>
   </div>
 </div>
 
@@ -772,6 +809,15 @@
     document.getElementById('lightbox-overlay').classList.remove('active');
   }
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+  // Tab switcher for eeg-capstone
+  function switchTab(panelId, btn){
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(panelId).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-bar').offsetTop - 80, behavior: 'smooth' });
+  }
 
   // Typewriter greeting
   (function(){
